@@ -65,12 +65,35 @@ CREATE TABLE obiekty_sportowe
   id_nadbudynku INTEGER REFERENCES obiekty_sportowe
 );
 
+
+CREATE TABLE sedziowie
+(
+  id INTEGER PRIMARY KEY ,
+  nazwa VARCHAR(100)
+);
+
+
 CREATE TABLE rozgrywka
 (
   id INTEGER PRIMARY KEY,
   id_obiektu INTEGER REFERENCES obiekty_sportowe,
   data_rozpoczecia TIMESTAMP,
-  data_zakonczenia TIMESTAMP
+  data_zakonczenia TIMESTAMP,
+  sedzia INTEGER REFERENCES sedziowie
+);
+
+CREATE TABLE sedziowie_rozgrywka
+(
+  id_sedzi INTEGER REFERENCES sedziowie,
+  id_rozgrywki INTEGER REFERENCES rozgrywka
+);
+
+CREATE TABLE zajscia
+(
+  sedzia INTEGER REFERENCES sedziowie,
+  rozgrywka INTEGER REFERENCES rozgrywka,
+  data TIMESTAMP,
+  zajscie VARCHAR(300)
 );
 
 CREATE TABLE kto_z_kim
