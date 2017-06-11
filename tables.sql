@@ -91,13 +91,25 @@ CREATE TABLE judge_game
 
 CREATE TABLE event_team
 (
+  id                INTEGER PRIMARY KEY,
   id_event          INTEGER REFERENCES event,
   id_team           INTEGER REFERENCES teams
 );
 
 
-
 CREATE TABLE scores(
-  id_event INTEGER REFERENCES event,
-  first
-)
+  id_event_team INTEGER REFERENCES event_team,
+  score INTEGER
+);
+
+CREATE TABLE times(
+  id_event_team INTEGER REFERENCES event_team,
+  time NUMERIC(11,4)
+);
+
+CREATE TABLE notes(
+  id_event_team INTEGER REFERENCES event_team,
+  note NUMERIC(11,4)
+);
+
+
