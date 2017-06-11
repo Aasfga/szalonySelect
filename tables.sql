@@ -1,105 +1,103 @@
-CREATE TABLE panstwa
+CREATE TABLE nationalities
 (
-  id    INTEGER PRIMARY KEY,
-  nazwa VARCHAR(100)
+  id      INTEGER PRIMARY KEY,
+  name    VARCHAR(100)
 );
 
-CREATE TABLE plec
+CREATE TABLE sexes
 (
-  id INTEGER PRIMARY KEY,
-  nazwa VARCHAR(100)
+  id      INTEGER PRIMARY KEY,
+  name    VARCHAR(100)
 );
 
-CREATE TABLE kategorie
+CREATE TABLE categories
 (
-  id                          INTEGER PRIMARY KEY,
-  nazwa                       VARCHAR(100),
-  ilosc_druzyn_na_olimpiadzie INTEGER,
-  ilosc_druzyn_w_rozgrywce    INTEGER,
-  ilosc_zawodnikow_w_druzynie INTEGER
+  id                              INTEGER PRIMARY KEY,
+  name                            VARCHAR(100),
+  number_of_teams_on_the_olympiad INTEGER,
+  number_of_teams_in_one_game     INTEGER,
+  number_of_players_in_team       INTEGER
 );
 
-CREATE TABLE dyscypliny
+CREATE TABLE disciplines
 (
-  id INTEGER PRIMARY KEY,
-  id_plci INTEGER REFERENCES plec,
-  id_kategorii INTEGER REFERENCES kategorie
+  id            INTEGER PRIMARY KEY,
+  id_sex        INTEGER REFERENCES sexes,
+  id_categories INTEGER REFERENCES categories
 );
 
-CREATE TABLE zawodnicy
+CREATE TABLE players
 (
-  id             INTEGER PRIMARY KEY,
-  imie           VARCHAR(100),
-  nazwisko       VARCHAR(100),
-  narodowosc     INTEGER REFERENCES panstwa,
-  data_urodzenia TIMESTAMP,
-  plec INTEGER REFERENCES plec
+  id                INTEGER PRIMARY KEY,
+  first_name        VARCHAR(100),
+  last_name         VARCHAR(100),
+  id_nationality    INTEGER REFERENCES nationalities,
+  birth_date        TIMESTAMP,
+  id_sex            INTEGER REFERENCES sexes
 );
 
-CREATE TABLE wagi
+CREATE TABLE weights
 (
-  id_zawodnika INTEGER REFERENCES zawodnicy,
-  waga         NUMERIC(10, 2),
-  data         TIMESTAMP
+  id_player     INTEGER REFERENCES players,
+  weight        NUMERIC(10, 2),
+  date          TIMESTAMP
 );
 
-CREATE TABLE druzyny
+CREATE TABLE teams
 (
-  id         INTEGER PRIMARY KEY,
-  plec_zawodnikow INTEGER REFERENCES plec,
-  dyscyplina INTEGER REFERENCES dyscypliny,
-  narodowosc INTEGER REFERENCES panstwa
+  id                  INTEGER PRIMARY KEY,
+  id_sex              INTEGER REFERENCES sexes,
+  id_discipline       INTEGER REFERENCES disciplines,
+  id_nationalities    INTEGER REFERENCES nationalities
 
 );
 
-CREATE TABLE kto_gdzie
+CREATE TABLE player_team
 (
-  id_zawodnika INTEGER REFERENCES zawodnicy,
-  id_druzyna   INTEGER REFERENCES druzyny
+  id_zawodnika    INTEGER REFERENCES players,
+  id_druzyna      INTEGER REFERENCES teams
 );
 
-CREATE TABLE obiekty_sportowe
+CREATE TABLE sport_venues
 (
-  id INTEGER PRIMARY KEY,
-  nazwa VARCHAR(100),
-  id_nadbudynku INTEGER REFERENCES obiekty_sportowe
-);
-
-
-CREATE TABLE sedziowie
-(
-  id INTEGER PRIMARY KEY ,
-  nazwa VARCHAR(100)
+  id              INTEGER PRIMARY KEY,
+  nazwa           VARCHAR(100),
+  id_main_venue   INTEGER REFERENCES sport_venues
 );
 
 
-CREATE TABLE rozgrywka
+CREATE TABLE judges
 (
-  id INTEGER PRIMARY KEY,
-  id_obiektu INTEGER REFERENCES obiekty_sportowe,
-  data_rozpoczecia TIMESTAMP,
-  data_zakonczenia TIMESTAMP,
-  sedzia INTEGER REFERENCES sedziowie
+  id              INTEGER PRIMARY KEY ,
+  name            VARCHAR(100)
 );
 
-CREATE TABLE sedziowie_rozgrywka
+
+CREATE TABLE event
 (
-  id_sedzi INTEGER REFERENCES sedziowie,
-  id_rozgrywki INTEGER REFERENCES rozgrywka
+  id                INTEGER PRIMARY KEY,
+  id_sport_venue    INTEGER REFERENCES sport_venues,
+  start_time        TIMESTAMP,
+  end_time          TIMESTAMP,
+  id_judge          INTEGER REFERENCES judges
 );
 
-CREATE TABLE zajscia
+CREATE TABLE judge_game
 (
-  sedzia INTEGER REFERENCES sedziowie,
-  rozgrywka INTEGER REFERENCES rozgrywka,
-  data TIMESTAMP,
-  zajscie VARCHAR(300)
+  id_judge          INTEGER REFERENCES judges,
+  id_event          INTEGER REFERENCES event
 );
 
-CREATE TABLE kto_z_kim
+
+CREATE TABLE event_team
 (
-  id_rozgrywki INTEGER REFERENCES rozgrywka,
-  id_druzyny INTEGER REFERENCES druzyny,
-  wyniki VARCHAR(100)
+  id_event          INTEGER REFERENCES event,
+  id_team           INTEGER REFERENCES teams
+);
+
+
+
+CREATE TABLE scores(
+  id_event INTEGER REFERENCES event,
+  first
 )
-
