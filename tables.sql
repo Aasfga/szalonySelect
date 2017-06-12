@@ -1,115 +1,124 @@
 CREATE TABLE nationalities
 (
-  id      INTEGER PRIMARY KEY,
-  name    VARCHAR(100)
+  id   SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL
 );
 
 CREATE TABLE sexes
 (
-  id      INTEGER PRIMARY KEY,
-  name    VARCHAR(100)
+  id   SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  UNIQUE (name)
 );
 
 CREATE TABLE categories
 (
-  id                              INTEGER PRIMARY KEY,
-  name                            VARCHAR(100),
-  number_of_teams_on_the_olympiad INTEGER,
-  number_of_teams_in_one_game     INTEGER,
-  number_of_players_in_team       INTEGER
+  id                SERIAL PRIMARY KEY,
+  name              VARCHAR NOT NULL,
+  min_team_olymiad  INTEGER,
+  max_team_olympiad INTEGER,
+  min_team_game     INTEGER,
+  max_team_game     INTEGER,
+  min_players_team  INTEGER,
+  max_players_team  INTEGER
 );
 
 CREATE TABLE disciplines
 (
   id            INTEGER PRIMARY KEY,
-  id_sex        INTEGER REFERENCES sexes,
-  id_categories INTEGER REFERENCES categories
+  id_sex        INTEGER REFERENCES sexes      NOT NULL,
+  id_categories INTEGER REFERENCES categories NOT NULL
 );
 
 CREATE TABLE players
 (
-  id                INTEGER PRIMARY KEY,
-  first_name        VARCHAR(100),
-  last_name         VARCHAR(100),
-  id_nationality    INTEGER REFERENCES nationalities,
-  birth_date        TIMESTAMP,
-  id_sex            INTEGER REFERENCES sexes
+  id             INTEGER PRIMARY KEY,
+  first_name     VARCHAR                          NOT NULL,
+  last_name      VARCHAR                          NOT NULL,
+  id_nationality INTEGER REFERENCES nationalities NOT NULL,
+  birth_date     TIMESTAMP                        NOT NULL,
+  id_sex         INTEGER REFERENCES sexes         NOT NULL
 );
 
 CREATE TABLE weights
 (
-  id_player     INTEGER REFERENCES players,
-  weight        NUMERIC(10, 2),
-  date          TIMESTAMP
+  id_player INTEGER REFERENCES players,
+  weight    NUMERIC(10, 2) NOT NULL,
+  date      TIMESTAMP      NOT NULL
 );
 
 CREATE TABLE teams
 (
-  id                  INTEGER PRIMARY KEY,
-  id_sex              INTEGER REFERENCES sexes,
-  id_discipline       INTEGER REFERENCES disciplines,
-  id_nationalities    INTEGER REFERENCES nationalities
-
+  id               INTEGER PRIMARY KEY,
+  id_sex           INTEGER REFERENCES sexes,
+  id_discipline    INTEGER REFERENCES disciplines   NOT NULL,
+  id_nationalities INTEGER REFERENCES nationalities NOT NULL
 );
 
 CREATE TABLE player_team
 (
-  id_zawodnika    INTEGER REFERENCES players,
-  id_druzyna      INTEGER REFERENCES teams
+  player_id INTEGER REFERENCES players,
+  team_id   INTEGER REFERENCES teams,
+
+  PRIMARY KEY (player_id, team_id)
 );
 
-CREATE TABLE sport_venues
+CREATE TABLE places
 (
-  id              INTEGER PRIMARY KEY,
-  nazwa           VARCHAR(100),
-  id_main_venue   INTEGER REFERENCES sport_venues
+  id    INTEGER PRIMARY KEY,
+  name  VARCHAR NOT NULL,
+  place INTEGER REFERENCES places
 );
 
 
 CREATE TABLE judges
 (
-  id              INTEGER PRIMARY KEY ,
-  name            VARCHAR(100)
+  id   INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
 );
 
 
 CREATE TABLE event
 (
-  id                INTEGER PRIMARY KEY,
-  id_sport_venue    INTEGER REFERENCES sport_venues,
-  start_time        TIMESTAMP,
-  end_time          TIMESTAMP,
-  id_judge          INTEGER REFERENCES judges
+  id         INTEGER PRIMARY KEY,
+  place_id   INTEGER REFERENCES places,
+  start_time TIMESTAMP,
+  end_time   TIMESTAMP,
+  id_judge   INTEGER REFERENCES judges
 );
 
 CREATE TABLE judge_game
 (
-  id_judge          INTEGER REFERENCES judges,
-  id_event          INTEGER REFERENCES event
+  id_judge INTEGER REFERENCES judges,
+  id_event INTEGER REFERENCES event,
+
+  PRIMARY KEY (id_judge, id_event)
 );
 
 
 CREATE TABLE event_team
 (
-  id                INTEGER PRIMARY KEY,
-  id_event          INTEGER REFERENCES event,
-  id_team           INTEGER REFERENCES teams
+  id       INTEGER PRIMARY KEY,
+  id_event INTEGER REFERENCES event,
+  id_team  INTEGER REFERENCES teams,
+
+  UNIQUE (id_event, id_team)
 );
 
 
-CREATE TABLE scores(
+CREATE TABLE scoreResults (
   id_event_team INTEGER REFERENCES event_team,
-  score INTEGER
+  score         INTEGER
 );
 
-CREATE TABLE times(
-  id_event_team INTEGER REFERENCES event_team,
-  time NUMERIC(11,4)
+CREATE TABLE timeResults (
+  event_team_id INTEGER REFERENCES event_team,
+  time          NUMERIC(11, 4)
 );
 
-CREATE TABLE notes(
+CREATE TABLE noteResults (
   id_event_team INTEGER REFERENCES event_team,
-  note NUMERIC(11,4)
+  note          NUMERIC(11, 4)
 );
 
 
