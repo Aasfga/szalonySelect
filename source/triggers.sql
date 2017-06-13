@@ -96,3 +96,36 @@ CREATE TRIGGER sex_change_team
 BEFORE UPDATE ON teams
 FOR EACH ROW
 EXECUTE PROCEDURE sex_change_team();
+
+
+CREATE OR REPLACE FUNCTION event_time() RETURNS trigger AS $checks$
+BEGIN
+IF new.start_time>new.end_time  THEN
+      RAISE 'Start time after end time';
+      RETURN NULL;
+END IF;
+RETURN new;
+END;
+$checks$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS result_after_finish
+ON event;
+CREATE TRIGGER result_after_finish BEFORE INSERT OR UPDATE ON event
+FOR EACH ROW EXECUTE PROCEDURE event_time();
+
+CREATE OR REPLACE FUNCTION team_number() RETURNS trigger AS $checks$
+BEGIN
+IF (select count(teams.id) from teams where id_discipline=new.id_discipline group by id_discipline)>=
+   (select max_team_olympiad from disciplines join categories on disciplines.id_categories=categories.id where disciplines.id=new.id_discipline)
+THEN
+      RAISE 'Too many teams';
+      RETURN NULL;
+END IF;
+RETURN new;
+END;
+$checks$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS number_of_teams
+ON teams;
+CREATE TRIGGER number_of_teams BEFORE INSERT OR UPDATE ON teams
+FOR EACH ROW EXECUTE PROCEDURE team_number();
