@@ -15,17 +15,17 @@ CREATE TABLE categories
 (
   id                SERIAL PRIMARY KEY,
   name              VARCHAR NOT NULL,
-  min_team_olymiad  INTEGER,
-  max_team_olympiad INTEGER,
-  min_team_game     INTEGER,
-  max_team_game     INTEGER,
-  min_players_team  INTEGER,
-  max_players_team  INTEGER
+  min_team_olymiad  INTEGER DEFAULT 0,
+  max_team_olympiad INTEGER DEFAULT 2147483647,
+  min_team_game     INTEGER DEFAULT 0,
+  max_team_game     INTEGER DEFAULT 2147483647,
+  min_players_team  INTEGER DEFAULT 0,
+  max_players_team  INTEGER DEFAULT 2147483647
 );
 
 CREATE TABLE disciplines
 (
-  id            INTEGER PRIMARY KEY,
+  id            SERIAL PRIMARY KEY,
   id_sex        INTEGER REFERENCES sexes      NOT NULL,
   id_categories INTEGER REFERENCES categories NOT NULL
 );
@@ -65,7 +65,7 @@ CREATE TABLE player_team
 
 CREATE TABLE places
 (
-  id    INTEGER PRIMARY KEY,
+  id    SERIAL PRIMARY KEY,
   name  VARCHAR NOT NULL,
   place INTEGER REFERENCES places
 );
@@ -82,9 +82,10 @@ CREATE TABLE event
 (
   id         INTEGER PRIMARY KEY,
   place_id   INTEGER REFERENCES places,
-  start_time TIMESTAMP,
+  start_time TIMESTAMP NOT NULL ,
   end_time   TIMESTAMP,
-  id_judge   INTEGER REFERENCES judges
+  discipline INTEGER NOT NULL ,
+  CHECK (start_time < event.end_time)
 );
 
 CREATE TABLE judge_game
@@ -106,19 +107,21 @@ CREATE TABLE event_team
 );
 
 
-CREATE TABLE scoreResults (
+CREATE TABLE results_score (
   id_event_team INTEGER REFERENCES event_team,
   score         INTEGER
 );
 
-CREATE TABLE timeResults (
+CREATE TABLE results_time (
   event_team_id INTEGER REFERENCES event_team,
   time          NUMERIC(11, 4)
 );
 
-CREATE TABLE noteResults (
+CREATE TABLE reesults_notes (
   id_event_team INTEGER REFERENCES event_team,
   note          NUMERIC(11, 4)
 );
 
+--Podstawowe dane
 
+INSERT INTO sexes VALUES (DEFAULT , 'male'), (DEFAULT , 'female');
