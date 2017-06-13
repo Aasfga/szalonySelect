@@ -136,12 +136,5 @@ CREATE TABLE results_notes (
 INSERT INTO sexes VALUES (DEFAULT , 'male'), (DEFAULT , 'female');
 
 INSERT INTO finals VALUES (1, 'final');
-<<<<<<< HEAD
 INSERT INTO finals VALUES (2, 'semi-final');
 INSERT INTO finals VALUES (3, 'eliminations');
-=======
-INSERT INTO finals VALUES (2, 'tird place');
-INSERT INTO finals VALUES (3, 'semi-final');
-INSERT INTO finals VALUES (4, 'quarterfinal');
-INSERT INTO finals VALUES (5, 'eliminations');
->>>>>>> 1e9ec4bf1236c560b59669732a6c0af993fb0120
