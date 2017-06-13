@@ -1,3 +1,10 @@
+
+CREATE TABLE finals
+(
+  id SERIAL,
+  name VARCHAR
+);
+
 CREATE TABLE nationalities
 (
   id   SERIAL PRIMARY KEY,
@@ -84,7 +91,8 @@ CREATE TABLE event
   place_id   INTEGER REFERENCES places,
   start_time TIMESTAMP NOT NULL ,
   end_time   TIMESTAMP,
-  discipline INTEGER NOT NULL ,
+  discipline INTEGER NOT NULL,
+  final_id INTEGER REFERENCES finals,
   CHECK (start_time < event.end_time)
 );
 
@@ -121,6 +129,7 @@ CREATE TABLE reesults_notes (
   id_event_team INTEGER REFERENCES event_team,
   note          NUMERIC(11, 4)
 );
+
 
 --Podstawowe dane
 
