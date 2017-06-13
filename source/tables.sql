@@ -64,10 +64,10 @@ CREATE TABLE teams
 
 CREATE TABLE player_team
 (
-  player_id INTEGER REFERENCES players,
-  team_id   INTEGER REFERENCES teams,
+  id_player INTEGER REFERENCES players,
+  id_team   INTEGER REFERENCES teams,
 
-  PRIMARY KEY (player_id, team_id)
+  PRIMARY KEY (id_player, id_team)
 );
 
 CREATE TABLE places
@@ -88,11 +88,11 @@ CREATE TABLE judges
 CREATE TABLE event
 (
   id         INTEGER PRIMARY KEY,
-  place_id   INTEGER REFERENCES places,
+  id_place   INTEGER REFERENCES places,
   start_time TIMESTAMP NOT NULL ,
   end_time   TIMESTAMP,
   discipline INTEGER NOT NULL,
-  final_id INTEGER REFERENCES finals,
+  id_final INTEGER REFERENCES finals,
   CHECK (start_time < event.end_time)
 );
 
@@ -121,7 +121,7 @@ CREATE TABLE results_score (
 );
 
 CREATE TABLE results_time (
-  event_team_id INTEGER REFERENCES event_team,
+  id_event_team INTEGER REFERENCES event_team,
   time          NUMERIC(11, 4)
 );
 
@@ -134,3 +134,4 @@ CREATE TABLE results_notes (
 --Podstawowe dane
 
 INSERT INTO sexes VALUES (DEFAULT , 'male'), (DEFAULT , 'female');
+
