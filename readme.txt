@@ -1,48 +1,48 @@
 Opis bazy:
 	Tabele:
 	-nationalities
-		informacje o krajach reprezentowanych przez zawodników
+		informacje o krajach reprezentowanych przez zawodnikÃ³w
 	-sexes
-		p³cie zawodników
+		pÅ‚cie zawodnikÃ³w
 	-categories
-		kategorie w jakich startuj¹ zawodnicy, zawiera informacje o liczbie graczy w druzynie, ilosci druzyn na olimpiadzie
+		kategorie w jakich startujÄ… zawodnicy, zawiera informacje o liczbie graczy w druzynie, ilosci druzyn na olimpiadzie
 	-disciplines
-		dyscypliny na olimpiadzie (kategorie, p³eæ zawodników)
+		dyscypliny na olimpiadzie (kategorie, pÅ‚eÄ‡ zawodnikÃ³w)
 	-players 
-		zawodnicy (imiê,nazwisko,kraj,p³eæ)
+		zawodnicy (imiÄ™,nazwisko,kraj,pÅ‚eÄ‡)
 	-weights
-		dane z wazenia zawodników
+		dane z wazenia zawodnikÃ³w
 	-teams
 		informacje o reprezentacjach
 	-player_team
-		pomocnicza tabela przejœciowa pomiêdzy graczami i dru¿ynami
+		pomocnicza tabela przejÅ›ciowa pomiÄ™dzy graczami i druÅ¼ynami
 	-places
 		obiekty sportowe
 	-judges
-		sêdziowie
+		sÄ™dziowie
 	-event
 		rozgrywki
 	-judge_game
-		pomocnicza pomiêdzy sêdziami i rozgrykami
+		pomocnicza pomiÄ™dzy sÄ™dziami i rozgrykami
 	-event_team
-		pomocnicza pomiêdzy rozgrykami i druzynami
-	-scoreResults
+		pomocnicza pomiÄ™dzy rozgrykami i druzynami
+	-results_score
 		wyniki danego meczu
-	-timeResults
-		czasy zawodników
-	-noteResults
-		noty przydzielone przez sêdziów
+	-results_time
+		czasy zawodnikÃ³w
+	-results_notes
+		noty przydzielone przez sÄ™dziÃ³w
 	-finals
 		etapy rozgrywek
 	
 
 	Wyzwalacze:
 	-team_insert
-		sprawdza poprawnoœæ danych dru¿yny
+		sprawdza poprawnoÅ›Ä‡ danych druÅ¼yny
 	-sex_change_team
-		sprawdza czy zawodnicy danej p³ci rywalizuj¹ w swojej kategorii
+		sprawdza czy zawodnicy danej pÅ‚ci rywalizujÄ… w swojej kategorii
 	-result_after_finish
 		sprawdza czy czas rozgrywki jest poprawny
 	-number_of_teams
-		sprawdza czy odpowiednia iloœæ druzyn startuje w danej dyscyplinie
+		sprawdza czy odpowiednia iloÅ›Ä‡ druzyn startuje w danej dyscyplinie
 	
