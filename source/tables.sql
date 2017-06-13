@@ -73,7 +73,7 @@ CREATE TABLE places
 
 CREATE TABLE judges
 (
-  id   INTEGER PRIMARY KEY,
+  id   SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL
 );
 
