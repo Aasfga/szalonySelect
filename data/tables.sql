@@ -125,7 +125,7 @@ CREATE TABLE results_time (
   time          NUMERIC(11, 4)
 );
 
-CREATE TABLE reesults_notes (
+CREATE TABLE results_notes (
   id_event_team INTEGER REFERENCES event_team,
   note          NUMERIC(11, 4)
 );
