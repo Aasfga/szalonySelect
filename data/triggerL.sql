@@ -2,18 +2,23 @@ CREATE OR REPLACE FUNCTION one_judge_in_game()
   RETURNS TRIGGER AS
 $one_judge_in_game$
 DECLARE
-   start_date DATE := (SELECT start_time
-                          FROM event
-                          WHERE id_judge = NEW.id_judge);
+  start_date DATE := (SELECT
+                        start_time
+                      FROM event
+                      WHERE id_judge = NEW.id_judge);
 
-   end_date DATE := (SELECT end_time
-                          FROM event
-                          WHERE id_judge = NEW.id_judge);
+  end_date   DATE := (SELECT
+                        end_time
+                      FROM event
+                      WHERE id_judge = NEW.id_judge);
 BEGIN
 
-  IF ( select * from event as e where e.id_judge = NEW.id_judge 
-				and (start_data,end_data) OVERLAPS ( e.start_time, e.end_time)
-				 ) is not null
+  IF (SELECT
+        *
+      FROM event AS e
+      WHERE e.id_judge = NEW.id_judge
+            AND (start_data, end_data) OVERLAPS (e.start_time, e.end_time)
+     ) IS NOT NULL
   THEN
     RAISE 'The referee judges more than one match';
   END IF;
@@ -35,30 +40,43 @@ CREATE OR REPLACE FUNCTION insert_event()
 $insert_event$
 DECLARE
 
-id_disciplines int := (SELECT d.id
-                          FROM event_team as et
-			    join teams as t on t.id = et.id_team
-			    join disciplines as d on d.id = t.id_disciplines
-                          WHERE et.id_event = NEW.id
-		          group by d.id
-);
+  id_disciplines INT := (SELECT
+                           d.id
+                         FROM event_team AS et
+                           JOIN teams AS t
+                             ON t.id = et.id_team
+                           JOIN disciplines AS d
+                             ON d.id = t.id_discipline
+                         WHERE et.id_event = NEW.id
+                         GROUP BY d.id
+  );
 
 BEGIN
 
-  IF ( select * from event as e 
-				 join event_team as et on et.id_event = e.id
-				 join teams as t on t.id = et.id_team
-			    	 join disciplines as d on d.id = t.id_disciplines
-					where e.final_id < NEW.final_id and d.id = id_disciplines and e.end_time < NEW.start_time				 			) is not null
+  IF (SELECT
+        *
+      FROM event AS e
+        JOIN event_team AS et
+          ON et.id_event = e.id
+        JOIN teams AS t
+          ON t.id = et.id_team
+        JOIN disciplines AS d
+          ON d.id = t.id_discipline
+      WHERE e.id_final < NEW.id_final AND d.id = id_disciplines AND e.end_time < NEW.start_time) IS NOT NULL
   THEN
     RAISE 'Wrong finals orders';
   END IF;
 
-  IF ( select * from event as e  
-				 join event_team as et on et.id_event = e.id
-				 join teams as t on t.id = et.id_team
-			    	 join disciplines as d on d.id = t.id_disciplines
-				where e.final_id < NEW.final_id and  d.id = id_disciplines and e.start_time > NEW.end_time				 			) is not null
+  IF (SELECT
+        *
+      FROM event AS e
+        JOIN event_team AS et
+          ON et.id_event = e.id
+        JOIN teams AS t
+          ON t.id = et.id_team
+        JOIN disciplines AS d
+          ON d.id = t.id_discipline
+      WHERE e.id_final < NEW.id_final AND d.id = id_disciplines AND e.start_time > NEW.end_time) IS NOT NULL
   THEN
     RAISE 'Wrong finals orders';
   END IF;

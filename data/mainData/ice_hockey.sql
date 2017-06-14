@@ -1,6 +1,6 @@
 
 --Meski team nr 1 ice hockey
-INSERT INTO teams VALUES(1, 1, 5, 191)
+INSERT INTO teams VALUES(1, 1, 5, 191);
 INSERT INTO players VALUES(0, 'London', 'Webster', 191, '1995-4-5', 1);
 Insert Into player_team VALUES (0, 1);
 Insert Into weights VALUES (0, 60, '2017-1-1');

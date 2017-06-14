@@ -12,22 +12,22 @@ DECLARE
                               ON teams.id_discipline = disciplines.id
                             JOIN categories
                               ON disciplines.id_categories = categories.id
-                          WHERE teams.id = new.team_id);
+                          WHERE teams.id = new.id_team);
 
   crr_players INTEGER := (SELECT
-                            count(player_id)
+                            count(id_player)
                           FROM player_team
-                          WHERE team_id = new.team_id);
+                          WHERE id_team = new.id_team);
 
   team_sex    INTEGER := (SELECT
                             id_sex
                           FROM teams
-                          WHERE id = new.team_id);
+                          WHERE id = new.id_team);
 
   player_sex  INTEGER := (SELECT
                             id_sex
                           FROM players
-                          WHERE id = new.player_id);
+                          WHERE id = new.id_player);
 
 BEGIN
 
@@ -74,9 +74,9 @@ BEGIN
              players.id_sex
            FROM teams
              JOIN player_team
-               ON teams.id = player_team.team_id
+               ON teams.id = player_team.id_team
              JOIN players
-               ON player_team.player_id = players.id
+               ON player_team.id_player = players.id
            WHERE teams.id = new.id
   LOOP
     IF r.id_sex != team_sex
