@@ -1,5 +1,6 @@
 
 --Meski team nr 1 ice hockey
+BEGIN;
 INSERT INTO teams VALUES(1, 1, 5, 191);
 INSERT INTO players VALUES(0, 'London', 'Webster', 191, '1995-4-5', 1);
 Insert Into player_team VALUES (0, 1);
@@ -373,9 +374,10 @@ INSERT INTO event VALUES (8, 2, '2017-01-10 15:30:00', '2017-01-10 16:00:00', 20
 INSERT INTO event VALUES (9, 2, '2017-01-10 16:00:00', '2017-01-10 16:30:00', 20, 3);
 INSERT INTO event VALUES (10, 2, '2017-01-10 16:30:00', '2017-01-10 17:00:00', 20, 3);
 INSERT INTO event VALUES (11, 2, '2017-01-10 17:00:00', '2017-01-10 17:30:00', 20, 3);
-INSERT INTO event VALUES (13, 2, '2017-01-10 17:30:00', '2017-01-10 18:00:00', 20, 2);
-INSERT INTO event VALUES (14, 2, '2017-01-10 18:00:00', '2017-01-10 18:30:00', 20, 2);
-INSERT INTO event VALUES (15, 2, '2017-01-10 18:30:00', '2017-01-10 19:00:00', 20, 1);
+INSERT INTO event VALUES (12, 2, '2017-01-10 17:30:00', '2017-01-10 18:00:00', 20, 3);
+INSERT INTO event VALUES (13, 2, '2017-01-10 18:00:00', '2017-01-10 18:30:00', 20, 2);
+INSERT INTO event VALUES (14, 2, '2017-01-10 18:30:00', '2017-01-10 19:00:00', 20, 2);
+INSERT INTO event VALUES (15, 2, '2017-01-10 19:00:00', '2017-01-10 19:30:00', 20, 1);
 
 ----
 
@@ -450,27 +452,27 @@ INSERT INTO results_score VALUES (28, 0);
 
 
 --judges
-INSERT INTO judges VALUES (1, 1);
-INSERT INTO judges VALUES (1, 2);
-INSERT INTO judges VALUES (1, 3);
-INSERT INTO judges VALUES (1, 4);
-INSERT INTO judges VALUES (1, 5);
-INSERT INTO judges VALUES (1, 6);
-INSERT INTO judges VALUES (1, 7);
+INSERT INTO judge_game VALUES (1, 1);
+INSERT INTO judge_game VALUES (1, 2);
+INSERT INTO judge_game VALUES (1, 3);
+INSERT INTO judge_game VALUES (1, 4);
+INSERT INTO judge_game VALUES (1, 5);
+INSERT INTO judge_game VALUES (1, 6);
+INSERT INTO judge_game VALUES (1, 7);
 ----
 
 
 --judges
-INSERT INTO judges VALUES (1, 8);
-INSERT INTO judges VALUES (1, 9);
-INSERT INTO judges VALUES (1, 10);
-INSERT INTO judges VALUES (1, 11);
-INSERT INTO judges VALUES (1, 12);
-INSERT INTO judges VALUES (1, 13);
-INSERT INTO judges VALUES (1, 14);
+INSERT INTO judge_game VALUES (1, 8);
+INSERT INTO judge_game VALUES (1, 9);
+INSERT INTO judge_game VALUES (1, 10);
+INSERT INTO judge_game VALUES (1, 11);
+INSERT INTO judge_game VALUES (1, 12);
+INSERT INTO judge_game VALUES (1, 13);
+INSERT INTO judge_game VALUES (1, 14);
 ----
 
-
+COMMIT;
 
 
 

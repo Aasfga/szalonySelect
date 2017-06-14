@@ -1,14 +1,14 @@
 Opis bazy:
 
 	Tabele:
-	-nationalities
-		informacje o krajach reprezentowanych przez zawodników
-	-sexes
-		płcie zawodników
 	-categories
 		kategorie w jakich startują zawodnicy, zawiera informacje o liczbie graczy w druzynie, ilosci druzyn na olimpiadzie
 	-disciplines
 		dyscypliny na olimpiadzie (kategorie, płeć zawodników)
+	-nationalities
+		informacje o krajach reprezentowanych przez zawodników
+	-sexes
+		płcie zawodników
 	-players 
 		zawodnicy (imię,nazwisko,kraj,płeć)
 	-weights
