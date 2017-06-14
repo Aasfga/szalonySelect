@@ -368,6 +368,18 @@ INSERT INTO event VALUES (6, 2, '2017-01-10 14:30:00', '2017-01-10 15:00:00', 5,
 INSERT INTO event VALUES (7, 2, '2017-01-10 15:00:00', '2017-01-10 15:30:00', 5, 1);
 ----
 
+--eventy
+INSERT INTO event VALUES (8, 2, '2017-01-10 15:30:00', '2017-01-10 16:00:00', 20, 3);
+INSERT INTO event VALUES (9, 2, '2017-01-10 16:00:00', '2017-01-10 16:30:00', 20, 3);
+INSERT INTO event VALUES (10, 2, '2017-01-10 16:30:00', '2017-01-10 17:00:00', 20, 3);
+INSERT INTO event VALUES (11, 2, '2017-01-10 17:00:00', '2017-01-10 17:30:00', 20, 3);
+INSERT INTO event VALUES (13, 2, '2017-01-10 17:30:00', '2017-01-10 18:00:00', 20, 2);
+INSERT INTO event VALUES (14, 2, '2017-01-10 18:00:00', '2017-01-10 18:30:00', 20, 2);
+INSERT INTO event VALUES (15, 2, '2017-01-10 18:30:00', '2017-01-10 19:00:00', 20, 1);
+
+----
+
+
 --event_team
 INSERT INTO event_team VALUES (1, 1, 1);
 INSERT INTO event_team VALUES (2, 1, 2);
@@ -384,6 +396,23 @@ INSERT INTO event_team VALUES (12, 6, 7);
 INSERT INTO event_team VALUES (13, 7, 1);
 INSERT INTO event_team VALUES (14, 7, 5);
 ----
+
+--event_team
+INSERT INTO event_team VALUES (15, 8, 9);
+INSERT INTO event_team VALUES (16, 8, 10);
+INSERT INTO event_team VALUES (17, 9, 11);
+INSERT INTO event_team VALUES (18, 9, 12);
+INSERT INTO event_team VALUES (19, 10, 13);
+INSERT INTO event_team VALUES (20, 10, 14);
+INSERT INTO event_team VALUES (21, 11, 15);
+INSERT INTO event_team VALUES (22, 11, 16);
+INSERT INTO event_team VALUES (23, 12, 9);
+INSERT INTO event_team VALUES (24, 12, 11);
+INSERT INTO event_team VALUES (25, 13, 13);
+INSERT INTO event_team VALUES (26, 13, 15);
+INSERT INTO event_team VALUES (27, 14, 9);
+INSERT INTO event_team VALUES (28, 14, 13);
+--event_team
 
 --results
 INSERT INTO results_score VALUES (1, 1);
@@ -402,6 +431,23 @@ INSERT INTO results_score VALUES (13, 1);
 INSERT INTO results_score VALUES (14, 0);
 ----
 
+--results
+INSERT INTO results_score VALUES (15, 1);
+INSERT INTO results_score VALUES (16, 0);
+INSERT INTO results_score VALUES (17, 1);
+INSERT INTO results_score VALUES (18, 0);
+INSERT INTO results_score VALUES (19, 1);
+INSERT INTO results_score VALUES (20, 0);
+INSERT INTO results_score VALUES (21, 1);
+INSERT INTO results_score VALUES (22, 0);
+INSERT INTO results_score VALUES (23, 1);
+INSERT INTO results_score VALUES (24, 0);
+INSERT INTO results_score VALUES (25, 1);
+INSERT INTO results_score VALUES (26, 0);
+INSERT INTO results_score VALUES (27, 1);
+INSERT INTO results_score VALUES (28, 0);
+-----
+
 
 --judges
 INSERT INTO judges VALUES (1, 1);
@@ -413,6 +459,16 @@ INSERT INTO judges VALUES (1, 6);
 INSERT INTO judges VALUES (1, 7);
 ----
 
+
+--judges
+INSERT INTO judges VALUES (1, 8);
+INSERT INTO judges VALUES (1, 9);
+INSERT INTO judges VALUES (1, 10);
+INSERT INTO judges VALUES (1, 11);
+INSERT INTO judges VALUES (1, 12);
+INSERT INTO judges VALUES (1, 13);
+INSERT INTO judges VALUES (1, 14);
+----
 
 
 
