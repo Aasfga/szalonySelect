@@ -9,23 +9,7 @@ public class Main {
 
     public static void main( String args[] ) {
 
-//        connectWithDataBase();
-        try {
-            connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/kruti",
-                            "kruti", "yeah");
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM finals;");
-            displayResultSet(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        connectWithDataBase();
 
         startApplication();
 
