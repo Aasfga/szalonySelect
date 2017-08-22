@@ -1,18 +1,32 @@
+import com.sun.org.apache.regexp.internal.RE;
+import org.omg.CORBA.MARSHAL;
+
+import java.lang.management.PlatformLoggingMXBean;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
     private static Connection connection;
-    private static Statement statement = null;
+    public static Statement statement = null;
 
     public static void main( String args[] ) {
 
         connectWithDataBase();
 
-        startApplication();
+        try {
+            PlayerStatement.generateAuto();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+//        startApplication();
+//
         closeConnection();
     }
 
@@ -249,6 +263,18 @@ public class Main {
 
     }
 
+    public static ArrayList<String> columnFromResultSet(ResultSet rs, int column) throws SQLException {
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                 arrayList.add (rs.getString(column) );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+
     private static void addNationality() {
         System.out.printf("Enter nationality name:");
         String name = scanner.next();
@@ -266,6 +292,12 @@ public class Main {
 
     private static void failureCommunicate() {
         System.out.println("Something went wrong :( Try with diffrent parameters.");
+    }
+
+
+    public static int randomFromRange(int a, int b ) {
+        Random random = new Random();
+        return a + Math.abs(random.nextInt())%(b-a+1);
     }
 
 }
