@@ -1,15 +1,13 @@
-import com.sun.org.apache.regexp.internal.RE;
-import org.omg.CORBA.MARSHAL;
+package common;
 
-import java.lang.management.PlatformLoggingMXBean;
-import java.security.spec.PKCS8EncodedKeySpec;
+import common.generators.Randomise;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class MainApp {
 
     private static Scanner scanner = new Scanner(System.in);
     private static Connection connection;
@@ -19,14 +17,15 @@ public class Main {
 
         connectWithDataBase();
 
+        Player player = new Player(statement);
         try {
-            PlayerStatement.generateAuto();
+            player.generateAuto();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
 //        startApplication();
-//
+
         closeConnection();
     }
 
@@ -107,7 +106,6 @@ public class Main {
                 }
             } catch (SQLException e) {
                 failureCommunicate();
-//                e.printStackTrace();
             }
         }
 
@@ -258,21 +256,9 @@ public class Main {
                 System.out.println();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+//            TODO
+//            e.printStackTrace();
         }
-
-    }
-
-    public static ArrayList<String> columnFromResultSet(ResultSet rs, int column) throws SQLException {
-        ArrayList<String> arrayList = new ArrayList<>();
-        try {
-            while (rs.next()) {
-                 arrayList.add (rs.getString(column) );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return arrayList;
     }
 
     private static void addNationality() {
@@ -293,11 +279,4 @@ public class Main {
     private static void failureCommunicate() {
         System.out.println("Something went wrong :( Try with diffrent parameters.");
     }
-
-
-    public static int randomFromRange(int a, int b ) {
-        Random random = new Random();
-        return a + Math.abs(random.nextInt())%(b-a+1);
-    }
-
 }
