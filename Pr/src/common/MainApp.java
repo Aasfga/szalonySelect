@@ -2,6 +2,7 @@ package common;
 
 import common.generators.Randomise;
 
+import java.lang.management.PlatformLoggingMXBean;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,9 +18,12 @@ public class MainApp {
 
         connectWithDataBase();
 
-        Player player = new Player(statement);
-        try {
-            player.generateAuto();
+        try{
+            new Player.Builder(statement).add();
+            Player.builder(statement).add();
+
+            Player.builder(statement).withFirstName("Filip").add();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
