@@ -1,59 +1,45 @@
+package common.generators;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Random;
 
-public class PlayerStatement {
 
-//    public static String generateManually(Scanner scanner) {
-//
-//        System.out.println("Give sex ID:");
-//
-//        String wybor = scanner.next();
-//        System.out.println("");
-//        return null;
-//    }
+public class Randomise {
 
+    private final Statement statement;
+    private final Preparer preparer;
 
-    public static String generateAuto() throws SQLException {
-
-        String sex = generateIDSex();
-        //1 - male, 2 - female
-
-        String firstName;
-        if( sex.equals(1)){
-            firstName = generateMaleName();
-        }else {
-            firstName = generateFemaleName();
-        }
-
-        String lastName = generateLastName();
-        String nationality = generateNationality();
-        String date = generateDate();
-
-        String sql = "INSERT INTO players VALUES(DEFAULT, \'" + firstName + "\', \'" + lastName + "\'," + nationality + ",\'" + date + "\'," + sex + ");";
-        Main.statement.execute(sql);
-
-        return null;
+    public Randomise(Statement statement){
+        this.statement = statement;
+        preparer = new Preparer(statement);
     }
 
+    public long randomFromBetween(long a, long b ) {
+        Random random = new Random();
+        return a + Math.abs(random.nextInt())%(b-a+1);
+    }
 
-    public static String generateIDSex() throws SQLException {
+    public int randomFromBetween(int a, int b ) {
+        Random random = new Random();
+        return a + Math.abs(random.nextInt())%(b-a+1);
+    }
 
-        String sql = "SELECT * FROM sexes;";
-        ResultSet rs = Main.statement.executeQuery(sql);
-        ArrayList<String> ids = Main.columnFromResultSet(rs,1);
+    public String randomIdFromTable(String table ) throws SQLException {
 
-        int rand = Main.randomFromRange(0,ids.size()-1);
+        String sql = "SELECT * FROM " + table + ";";
+        ResultSet rs = statement.executeQuery(sql);
+        ArrayList<String> ids = preparer.arrayFromResultSetColumn(rs,1);
+
+        int rand = randomFromBetween(0,ids.size()-1);
 
         return ids.get(rand);
     }
 
-
-
-    public static String generateFemaleName() {
+    public String generateFemaleName() {
 
         String[] femaleNames = {
                 "Robena",
@@ -158,12 +144,12 @@ public class PlayerStatement {
                 "Shavonne",
         };
 
-        int rand = Main.randomFromRange(0,femaleNames.length-1);
-        System.out.println(rand);
+        int rand = randomFromBetween(0,femaleNames.length-1);
+
         return femaleNames[rand];
     }
 
-    public static String generateMaleName() {
+    public String generateMaleName() {
 
         String[] maleNames = {
                 "Mohammad",
@@ -264,11 +250,11 @@ public class PlayerStatement {
                 "Robin",
                 "Dewitt",
                 "Brad"};
-        int rand = Main.randomFromRange(0, maleNames.length - 1);
+        int rand = randomFromBetween(0, maleNames.length - 1);
         return maleNames[rand];
     }
 
-    public static String generateLastName() {
+    public String generateLastName() {
         String[] lastNames = {
                 "Hansen",
                 "Summers",
@@ -371,47 +357,18 @@ public class PlayerStatement {
                 "Whitaker",
                 "Cuevas"
         };
-        int rand = Main.randomFromRange(0,lastNames.length-1);
+
+        int rand = randomFromBetween(0, lastNames.length - 1);
         return lastNames[rand];
     }
 
-    public static String generateNationality() throws SQLException {
-
-        String sql = "SELECT * FROM nationalities;";
-        ResultSet rs = Main.statement.executeQuery(sql);
-        ArrayList<String> ids = Main.columnFromResultSet(rs,1);
-
-        int rand = Main.randomFromRange(0,ids.size()-1);
-
-        return ids.get(rand);
+    public String generateBirthTime(){
+        Timestamp timestamp = new Timestamp( randomFromBetween(400000000000L,1000000000000L) );
+        return timestamp.toString();
     }
 
-
-    public static String generateDate(){
-        GregorianCalendar gc = new GregorianCalendar();
-
-        int year = randBetween(1900, 2010);
-
-        gc.set(gc.YEAR, year);
-
-        int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
-
-        gc.set(gc.DAY_OF_YEAR, dayOfYear);
-
-        System.out.println(gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
-
-
-        Random random = new Random();
-        int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
-        int maxDay = (int) LocalDate.of(2015, 1, 1).toEpochDay();
-        long randomDay = minDay + random.nextInt(maxDay - minDay);
-
-        LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
-
-        return randomBirthDate.toString();
-    }
-
-    public static int randBetween(int start, int end) {
-        return start + (int)Math.round(Math.random() * (end - start));
+    public String generateOlympicTime(){
+        Timestamp timestamp = new Timestamp( randomFromBetween(1498000000000L,1500000000000L));
+        return timestamp.toString();
     }
 }
