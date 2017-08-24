@@ -39,7 +39,7 @@ CREATE TABLE disciplines
 
 CREATE TABLE players
 (
-  id             INTEGER PRIMARY KEY,
+  id             SERIAL PRIMARY KEY,
   first_name     VARCHAR                          NOT NULL,
   last_name      VARCHAR                          NOT NULL,
   id_nationality INTEGER REFERENCES nationalities NOT NULL,
