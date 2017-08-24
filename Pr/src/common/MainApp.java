@@ -294,8 +294,7 @@ public class MainApp {
         System.out.printf("Enter judge last name:");
         String last_name = scanner.next();
         try {
-            String sql = "INSERT INTO judges VALUES( DEFAULT, '" + first_name + " " + last_name + "');";
-            statement.execute(sql);
+            Judge.builder(statement).withFirstName(first_name).withLastName( last_name ).add();
         } catch (SQLException e) {
             System.out.println("Something went wrong...Sorry. Try different name.");
             e.printStackTrace();
