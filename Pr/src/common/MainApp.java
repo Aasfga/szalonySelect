@@ -24,6 +24,9 @@ public class MainApp {
 
             Player.builder(statement).withFirstName("Filip").add();
 
+            Judge.builder( statement ).add();
+
+            Judge.builder(statement).withFirstName("Marcin").add();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,7 +141,7 @@ public class MainApp {
                 //TODO
                 break;
             case "5":
-                //TODO
+                displayJudges();
                 break;
             case "6":
                 //TODO
@@ -153,6 +156,11 @@ public class MainApp {
 
     private static void displayNationalities() throws SQLException {
         String sql = "SELECT * FROM nationalities;";
+        ResultSet rs = statement.executeQuery(sql);
+        displayResultSet(rs);
+    }
+    private static void displayJudges() throws SQLException {
+        String sql = "SELECT * FROM judges;";
         ResultSet rs = statement.executeQuery(sql);
         displayResultSet(rs);
     }
@@ -177,7 +185,7 @@ public class MainApp {
                 //TODO
                 break;
             case "5":
-                //TODO
+                addJudge();
                 break;
             case "6":
                 //TODO
@@ -273,14 +281,30 @@ public class MainApp {
             String sql = "INSERT INTO nationalities VALUES( DEFAULT, '" + name + "');";
             statement.execute(sql);
         } catch (SQLException e) {
-            System.out.println("Something went wrong...Sorry. Try diffrent name.");
+            System.out.println("Something went wrong...Sorry. Try different name.");
             e.printStackTrace();
             return;
         }
         System.out.println("Success! " + name + " added.\n");
     }
 
+    private static void addJudge() {
+        System.out.printf("Enter judge first name:");
+        String first_name = scanner.next();
+        System.out.printf("Enter judge last name:");
+        String last_name = scanner.next();
+        try {
+            String sql = "INSERT INTO judges VALUES( DEFAULT, '" + first_name + " " + last_name + "');";
+            statement.execute(sql);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong...Sorry. Try different name.");
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("Success! " + first_name+ " " + last_name + " added.\n");
+    }
+
     private static void failureCommunicate() {
-        System.out.println("Something went wrong :( Try with diffrent parameters.");
+        System.out.println("Something went wrong :( Try with different parameters.");
     }
 }
