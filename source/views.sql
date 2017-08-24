@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS silver_medals;
 DROP VIEW IF EXISTS bronze_medals;
 DROP VIEW IF EXISTS results;
 DROP VIEW IF EXISTS team_category;
-
+DROP VIEW IF EXISTS players_all;
 
 
 
@@ -21,6 +21,11 @@ CREATE VIEW results AS SELECT
             join team_category on event_team.id_team=team_category.team
             join event on event_team.id_event=event.id
             join finals on id_final=finals.id group by team_category.category,team_category.country,finals.id;
+            
+CREATE VIEW players_all AS SELECT
+      players.*,weights.weight,weighst.date
+      from players
+            join weights on weights.id_player=players.id;
 
 CREATE VIEW golden_medals AS SELECT country,category from
       (select country, category, max(score) as scoremax from results where final=1 group by country,category)s where s.scoremax=1;
