@@ -13,20 +13,20 @@ public class Manually {
     }
     private static Scanner scanner = new Scanner(System.in);
 
-    public static class Communication{
-        public static void hello(String arg){
-            System.out.printf("Adding new "+arg+":");
+    static class Communication{
+        static void hello(String arg){
+            System.out.printf("Adding new "+arg+":\n");
         }
-        public static String enter(String word){
+        static String enter(String word){
             System.out.printf("Enter "+word+":");
             return scanner.next();
         }
-        public static String enter(String word,String extrainfo){
+        static String enter(String word,String extrainfo){
             System.out.printf("Enter "+word+":");
             System.out.printf( "("+extrainfo+")" );
             return scanner.next();
         }
-        public static void error(SQLException e){
+        static void error(SQLException e){
             System.out.println("Something went wrong...Sorry. Try different parameters.");
             e.printStackTrace();
         }
@@ -56,16 +56,17 @@ public class Manually {
 
         public void category(){
             Communication.hello( "category" );
-            String name=Communication.enter( "name" );
-            String min_team_game=Communication.enter( "min_team_game" );
-            String max_team_game=Communication.enter( "max_team_game" );
-            String min_players_team=Communication.enter( "min_players_team" );
-            String max_players_team=Communication.enter( "max_players_team" );
-            String id_result_type=Communication.enter( "id_result_type","1-score, 2-time, 3-points" );
+            String name= Communication.enter( "name" );
             String sex=Communication.enter( "sex","1-male, 2-female, 3-both" );
 
             try {
-                String sql = "INSERT INTO categories VALUES(DEFAULT ,\'" + name + "\', " + min_team_game + ", " + max_team_game + "," + min_players_team + "," + max_players_team + "," + id_result_type + ");";
+                String sql = "INSERT INTO categories VALUES(DEFAULT ,\'" +
+                        name + "\', "
+                        + Communication.enter( "min_team_game" ) + ", "
+                        + Communication.enter( "max_team_game" ) + ","
+                        + Communication.enter( "min_players_team" ) + ","
+                        + Communication.enter( "max_players_team" ) + ","
+                        + Communication.enter( "id_result_type","1-score, 2-time, 3-points" ) + ");";
                 statement.execute( sql );
 
                 String categoryID = preparer.lastUsedDefaultID("categories");
