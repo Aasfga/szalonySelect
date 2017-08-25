@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS categories
 (
   id                SERIAL PRIMARY KEY,
   name              VARCHAR(30) NOT NULL,
-  min_team_olympiad  INTEGER DEFAULT 0,
-  max_team_olympiad INTEGER DEFAULT 2147483647,
   min_team_game     INTEGER DEFAULT 0,
   max_team_game     INTEGER DEFAULT 2147483647,
   min_players_team  INTEGER DEFAULT 0,
