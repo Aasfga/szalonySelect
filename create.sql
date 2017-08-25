@@ -1,24 +1,9 @@
-
-CREATE TABLE finals
-(
-  id SERIAL PRIMARY KEY ,
-  name VARCHAR UNIQUE
-);
-
-CREATE TABLE nationalities
+	CREATE TABLE  IF NOT EXISTS result_types
 (
   id   SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL
 );
-
-CREATE TABLE sexes
-(
-  id   SERIAL PRIMARY KEY,
-  name VARCHAR NOT NULL,
-  UNIQUE (name)
-);
-
-CREATE TABLE categories
+CREATE TABLE IF NOT EXISTS categories
 (
   id                SERIAL PRIMARY KEY,
   name              VARCHAR NOT NULL,
@@ -27,50 +12,18 @@ CREATE TABLE categories
   min_team_game     INTEGER DEFAULT 0,
   max_team_game     INTEGER DEFAULT 2147483647,
   min_players_team  INTEGER DEFAULT 0,
-  max_players_team  INTEGER DEFAULT 2147483647
+  max_players_team  INTEGER DEFAULT 2147483647,
+  id_result_type    INTEGER REFERENCES result_types
 );
 
-CREATE TABLE disciplines
+CREATE TABLE IF NOT EXISTS sexes
 (
-  id            SERIAL PRIMARY KEY,
-  id_sex        INTEGER REFERENCES sexes      NOT NULL,
-  id_categories INTEGER REFERENCES categories NOT NULL
+  id   SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  UNIQUE (name)
 );
 
-CREATE TABLE players
-(
-  id             INTEGER PRIMARY KEY,
-  first_name     VARCHAR                          NOT NULL,
-  last_name      VARCHAR                          NOT NULL,
-  id_nationality INTEGER REFERENCES nationalities NOT NULL,
-  birth_date     TIMESTAMP                        NOT NULL,
-  id_sex         INTEGER REFERENCES sexes         NOT NULL
-);
-
-CREATE TABLE weights
-(
-  id_player INTEGER REFERENCES players,
-  weight    NUMERIC(10, 2) NOT NULL,
-  date      TIMESTAMP      NOT NULL
-);
-
-CREATE TABLE teams
-(
-  id               INTEGER PRIMARY KEY,
-  id_sex           INTEGER REFERENCES sexes,
-  id_discipline    INTEGER REFERENCES disciplines   NOT NULL,
-  id_nationalities INTEGER REFERENCES nationalities NOT NULL
-);
-
-CREATE TABLE player_team
-(
-  id_player INTEGER REFERENCES players,
-  id_team   INTEGER REFERENCES teams,
-
-  PRIMARY KEY (id_player, id_team)
-);
-
-CREATE TABLE places
+CREATE TABLE  IF NOT EXISTS  places
 (
   id    SERIAL PRIMARY KEY,
   name  VARCHAR NOT NULL,
@@ -78,25 +31,89 @@ CREATE TABLE places
 );
 
 
-CREATE TABLE judges
+CREATE TABLE IF NOT EXISTS finals
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS disciplines
+(
+  id            SERIAL PRIMARY KEY,
+  id_sex        INTEGER REFERENCES sexes      NOT NULL,
+  id_categories INTEGER REFERENCES categories NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS nationalities
 (
   id   SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS  judges
+(
+  id   SERIAL PRIMARY KEY,
+  first_name     VARCHAR                          NOT NULL,
+  last_name      VARCHAR                          NOT NULL
+);
 
-CREATE TABLE event
+
+
+CREATE TABLE IF NOT EXISTS  event
 (
   id         INTEGER PRIMARY KEY,
   id_place   INTEGER REFERENCES places,
   start_time TIMESTAMP NOT NULL ,
   end_time   TIMESTAMP,
-  discipline INTEGER NOT NULL,
+  id_disciplines INTEGER REFERENCES disciplines,
   id_final INTEGER REFERENCES finals,
   CHECK (start_time < event.end_time)
 );
 
-CREATE TABLE judge_game
+CREATE TABLE IF NOT EXISTS  teams
+(
+  id               INTEGER PRIMARY KEY,
+  id_sex           INTEGER REFERENCES sexes,
+  id_discipline    INTEGER REFERENCES disciplines   NOT NULL,
+  id_nationalities INTEGER REFERENCES nationalities NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS  players
+(
+  id             SERIAL PRIMARY KEY,
+  first_name     VARCHAR                          NOT NULL,
+  last_name      VARCHAR                          NOT NULL,
+  id_nationality INTEGER REFERENCES nationalities NOT NULL,
+  birth_date     TIMESTAMP                        NOT NULL,
+  id_sex         INTEGER REFERENCES sexes         NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS  weights
+(
+  id_player INTEGER REFERENCES players,
+  weight    NUMERIC(10, 2) NOT NULL,
+  date      TIMESTAMP      NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS  player_team
+(
+  id_player INTEGER REFERENCES players,
+  id_team   INTEGER REFERENCES teams,
+
+  PRIMARY KEY (id_player, id_team)
+);
+
+CREATE TABLE IF NOT EXISTS  places
+(
+  id    SERIAL PRIMARY KEY,
+  name  VARCHAR NOT NULL,
+  place INTEGER REFERENCES places
+);
+
+
+CREATE TABLE IF NOT EXISTS  judge_game
 (
   id_judge INTEGER REFERENCES judges,
   id_event INTEGER REFERENCES event,
@@ -105,30 +122,30 @@ CREATE TABLE judge_game
 );
 
 
-CREATE TABLE event_team
+CREATE TABLE IF NOT EXISTS  event_team_result
 (
-  id       INTEGER PRIMARY KEY,
   id_event INTEGER REFERENCES event,
   id_team  INTEGER REFERENCES teams,
+  result   INTEGER NOT NULL,
 
-  UNIQUE (id_event, id_team)
+  PRIMARY KEY (id_event, id_team)
 );
 
 
-CREATE TABLE results_score (
-  id_event_team INTEGER REFERENCES event_team,
-  score         INTEGER
-);
+--CREATE TABLE IF NOT EXISTS  results_score (
+ -- id_event_team INTEGER REFERENCES event_team,
+ -- score         INTEGER
+--);
 
-CREATE TABLE results_time (
-  id_event_team INTEGER REFERENCES event_team,
-  time          NUMERIC(11, 4)
-);
+--CREATE TABLE results_time (
+-- id_event_team INTEGER REFERENCES event_team,
+--  time          NUMERIC(11, 4)
+--);
 
-CREATE TABLE results_notes (
-  id_event_team INTEGER REFERENCES event_team,
-  note          NUMERIC(11, 4)
-);
+--CREATE TABLE results_notes (
+--  id_event_team INTEGER REFERENCES event_team,
+--  note          NUMERIC(11, 4)
+--);
 
 
 --Podstawowe dane
