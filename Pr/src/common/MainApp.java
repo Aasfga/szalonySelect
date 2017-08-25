@@ -15,18 +15,22 @@ public class MainApp {
 
         connectWithDataBase();
 
+
         try{
             SchemaProvider schemaProvider = new SchemaProvider(connection,statement);
+
+            schemaProvider.clear();
             schemaProvider.create();
+            schemaProvider.addData();
 
             new Player.Builder(statement).add();
             Player.builder(statement).add();
-
             Player.builder(statement).withFirstName("Filip").add();
 
             Judge.builder( statement ).add();
-
             Judge.builder(statement).withFirstName("Marcin").add();
+
+            Event.builder(statement).add();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -159,6 +163,7 @@ public class MainApp {
         ResultSet rs = statement.executeQuery(sql);
         displayResultSet(rs);
     }
+
     private static void displayJudges() throws SQLException {
         String sql = "SELECT * FROM judges;";
         ResultSet rs = statement.executeQuery(sql);

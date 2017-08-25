@@ -92,7 +92,6 @@ public class Player {
             String playerID = preparer.lastUsedDefaultID("players");
             sql = "INSERT INTO weights VALUES(" + playerID + ", " + bodyMassKg + "." + bodyMassAfterDot + ",\'" + weightDate + "\');";
 
-            System.out.println(sql);
             statement.execute(sql);
         }
 

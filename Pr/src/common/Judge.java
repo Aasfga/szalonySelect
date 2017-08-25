@@ -41,7 +41,7 @@ public class Judge {
             firstName = (firstName == null) ? ((random.nextInt()%2==0) ? randomise.generateMaleName() : randomise.generateFemaleName()) : firstName;
             lastName = (lastName == null) ? randomise.generateLastName() : lastName;
 
-            String sql = "INSERT INTO Judges VALUES(DEFAULT, \'" + firstName + " " + lastName + "\')";
+            String sql = "INSERT INTO Judges VALUES(DEFAULT, \'" + firstName + "\',\' " + lastName + "\')";
             statement.execute( sql );
         }
 
