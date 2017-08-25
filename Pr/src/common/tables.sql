@@ -60,20 +60,20 @@ CREATE TABLE IF NOT EXISTS  judges
 
 
 
-CREATE TABLE IF NOT EXISTS  event
+CREATE TABLE IF NOT EXISTS  events
 (
-  id         INTEGER PRIMARY KEY,
+  id         SERIAL PRIMARY KEY,
   id_place   INTEGER REFERENCES places,
   start_time TIMESTAMP NOT NULL ,
   end_time   TIMESTAMP,
   id_disciplines INTEGER REFERENCES disciplines,
   id_final INTEGER REFERENCES finals,
-  CHECK (start_time < event.end_time)
+  CHECK (start_time < events.end_time)
 );
 
 CREATE TABLE IF NOT EXISTS  teams
 (
-  id               INTEGER PRIMARY KEY,
+  id               SERIAL PRIMARY KEY,
   id_sex           INTEGER REFERENCES sexes,
   id_discipline    INTEGER REFERENCES disciplines   NOT NULL,
   id_nationalities INTEGER REFERENCES nationalities NOT NULL
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS  places
 CREATE TABLE IF NOT EXISTS  judge_game
 (
   id_judge INTEGER REFERENCES judges,
-  id_event INTEGER REFERENCES event,
+  id_event INTEGER REFERENCES events,
 
   PRIMARY KEY (id_judge, id_event)
 );
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS  judge_game
 
 CREATE TABLE IF NOT EXISTS  event_team_result
 (
-  id_event INTEGER REFERENCES event,
+  id_event INTEGER REFERENCES events,
   id_team  INTEGER REFERENCES teams,
   result   INTEGER NOT NULL,
 
