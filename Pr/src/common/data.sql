@@ -9,21 +9,21 @@ INSERT INTO sexes VALUES
 (DEFAULT , 'male'),
 (DEFAULT , 'female');
 
-INSERT INTO categories VALUES (DEFAULT, 'Biathlon', DEFAULT, 60, 3, 60, 1, 1, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Alpine skiing', DEFAULT, 60, 3, 60, 1, 1, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Bobsleight', DEFAULT, 40, 3, 40, 2, 2, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Curling', DEFAULT, 50,2, 2, 5, 5, 3);
-INSERT INTO categories VALUES (DEFAULT, 'Ice hockey', DEFAULT, 16, 2, 2, 6, 6, 1);
-INSERT INTO categories VALUES (DEFAULT, 'Figure skating', DEFAULT, 40, 2, 2, 1, 2, 3);
-INSERT INTO categories VALUES (DEFAULT, 'Skeleton', DEFAULT, 30, 3, 20, 1, 1, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Competetive progrmming', DEFAULT, 40, 5, 40, 3, 3, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Ski jumping', DEFAULT, 50, 10, 50, 1, 1, 3);
-INSERT INTO categories VALUES (DEFAULT, 'League of legends', DEFAULT, 16, 2, 2, 5, 5, 1);
-INSERT INTO categories VALUES (DEFAULT, 'CS-GO', DEFAULT, 16, 2, 2, 5, 5, 1);
-INSERT INTO categories VALUES (DEFAULT, 'Snowboarding', DEFAULT, 40, 3, 40, 5, 5, 3);
-INSERT INTO categories VALUES (DEFAULT, 'Speed skating', DEFAULT, 30, 3, 30, 1, 1, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Cross-country skiing', DEFAULT, 40, 3, 40, 5, 5, 2);
-INSERT INTO categories VALUES (DEFAULT, 'Freestyle skiing', DEFAULT, 40, 3, 40, 1, 1, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Biathlon', 3, 60, 1, 1, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Alpine skiing', 3, 60, 1, 1, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Bobsleight', 3, 40, 2, 2, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Curling',2, 2, 5, 5, 3);
+INSERT INTO categories VALUES (DEFAULT, 'Ice hockey', 2, 2, 6, 6, 1);
+INSERT INTO categories VALUES (DEFAULT, 'Figure skating', 2, 2, 1, 2, 3);
+INSERT INTO categories VALUES (DEFAULT, 'Skeleton', 3, 20, 1, 1, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Competetive progrmming', 5, 40, 3, 3, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Ski jumping', 10, 50, 1, 1, 3);
+INSERT INTO categories VALUES (DEFAULT, 'League of legends', 2, 2, 5, 5, 1);
+INSERT INTO categories VALUES (DEFAULT, 'CS-GO', 2, 2, 5, 5, 1);
+INSERT INTO categories VALUES (DEFAULT, 'Snowboarding', 3, 40, 5, 5, 3);
+INSERT INTO categories VALUES (DEFAULT, 'Speed skating', 3, 30, 1, 1, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Cross-country skiing', 3, 40, 5, 5, 2);
+INSERT INTO categories VALUES (DEFAULT, 'Freestyle skiing', 3, 40, 1, 1, 2);
 INSERT INTO finals VALUES (1, 'final');
 INSERT INTO finals VALUES (2, 'semi-final');
 INSERT INTO finals VALUES (3, 'eliminations');
