@@ -1,5 +1,6 @@
 package common;
 
+import common.generators.Manually;
 import common.generators.SchemaProvider;
 
 import java.sql.*;
@@ -31,6 +32,9 @@ public class MainApp {
             Judge.builder(statement).withFirstName("Marcin").add();
 
             Event.builder(statement).add();
+
+            Manually.builder( statement ).judge();
+            Manually.builder( statement ).category();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -181,7 +185,7 @@ public class MainApp {
                 addNationality();
                 break;
             case "2":
-                //TODO
+                Manually.builder( statement ).category();
                 break;
             case "3":
                 //TODO
@@ -190,7 +194,7 @@ public class MainApp {
                 //TODO
                 break;
             case "5":
-                addJudge();
+                Manually.builder( statement ).judge();
                 break;
             case "6":
                 //TODO
@@ -291,21 +295,6 @@ public class MainApp {
             return;
         }
         System.out.println("Success! " + name + " added.\n");
-    }
-
-    private static void addJudge() {
-        System.out.printf("Enter judge first name:");
-        String first_name = scanner.next();
-        System.out.printf("Enter judge last name:");
-        String last_name = scanner.next();
-        try {
-            Judge.builder(statement).withFirstName(first_name).withLastName( last_name ).add();
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...Sorry. Try different name.");
-            e.printStackTrace();
-            return;
-        }
-        System.out.println("Success! " + first_name+ " " + last_name + " added.\n");
     }
 
     private static void failureCommunicate() {
