@@ -76,7 +76,7 @@ public class Player {
         public void add() throws SQLException {
             sexID = ( sexID == null ) ? randomise.randomIdFromTable("sexes") : sexID;
             firstName = ( firstName == null ) ? ( (sexID.equals("1")) ? randomise.generateMaleName() : randomise.generateFemaleName() ) : firstName;
-            lastName = ( sexID == null ) ? randomise.generateLastName() : lastName;
+            lastName = ( lastName == null ) ? randomise.generateLastName() : lastName;
             nationalityID = ( nationalityID == null ) ? randomise.randomIdFromTable("nationalities") : nationalityID;
             birthDate = ( birthDate == null ) ? randomise.generateBirthTime() : birthDate;
 
@@ -87,13 +87,13 @@ public class Player {
             weight = (weight == null) ? bodyMassKg + "." + bodyMassAfterDot : weight;
 
             String sql = "INSERT INTO players VALUES(DEFAULT, \'" + firstName + "\', \'" + lastName + "\'," + nationalityID + ",\'" + birthDate + "\'," + sexID + ");";
-//            statement.execute(sql);
+            statement.execute(sql);
 
             String playerID = preparer.lastUsedDefaultID("players");
             sql = "INSERT INTO weights VALUES(" + playerID + ", " + bodyMassKg + "." + bodyMassAfterDot + ",\'" + weightDate + "\');";
 
             System.out.println(sql);
-//            statement.execute(sql);
+            statement.execute(sql);
         }
 
     }

@@ -1,11 +1,8 @@
 package common;
 
-import common.generators.Randomise;
+import common.generators.SchemaProvider;
 
-import java.lang.management.PlatformLoggingMXBean;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class MainApp {
@@ -19,6 +16,9 @@ public class MainApp {
         connectWithDataBase();
 
         try{
+            SchemaProvider schemaProvider = new SchemaProvider(connection,statement);
+            schemaProvider.create();
+
             new Player.Builder(statement).add();
             Player.builder(statement).add();
 
@@ -27,6 +27,7 @@ public class MainApp {
             Judge.builder( statement ).add();
 
             Judge.builder(statement).withFirstName("Marcin").add();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,7 +36,6 @@ public class MainApp {
 
         closeConnection();
     }
-
 
     private static void connectWithDataBase(){
         System.out.println("Hello!\nWelcome to \"Olympic Games database programme!\" \n \n");
