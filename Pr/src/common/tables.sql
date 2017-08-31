@@ -133,4 +133,31 @@ CREATE VIEW disciplinemale AS SELECT id from disciplines where id_sex = 1;
 CREATE VIEW disciplinefemale AS SELECT id from disciplines where id_sex = 2;
 
 
+CREATE OR REPLACE FUNCTION event_team_result_insert()
+  RETURNS TRIGGER AS
+$event_team_result_insert$
+DECLARE
+
+  discipline_id_fromevent INTEGER := (SELECT id_disciplines FROM event WHERE id = new.id_event);
+
+  discipline_id_fromteams INTEGER := (SELECT id_discipline FROM teams WHERE id = new.id_team);
+
+BEGIN
+
+  IF discipline_id_fromevent != discipline_id_fromteams
+  THEN
+    RAISE 'Wrong id_disciplines';
+  END IF;
+
+  RETURN new;
+END;
+$event_team_result_insert$
+LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS event_team_result_insert
+ON event_team_result;
+CREATE TRIGGER event_team_result_insert
+BEFORE INSERT ON event_team_result
+FOR EACH ROW
+EXECUTE PROCEDURE event_team_result_insert();
 
