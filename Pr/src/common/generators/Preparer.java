@@ -30,4 +30,18 @@ public class Preparer {
         resultSet.next();
         return resultSet.getString(1);
     }
+
+    public boolean isAlpha(String s){
+        String pattern= "^[a-zA-Z]*$";
+        return s.matches(pattern);
+    }
+
+    public boolean isTableContainsGivenId(String tableName, String id) throws SQLException {
+        String sql = "SELECT * FROM " + tableName + ";";
+        ResultSet rs =  statement.executeQuery(sql);
+
+        ArrayList<String> arrayList = arrayFromResultSetColumn(rs, 1);
+
+        return arrayList.contains(id);
+    }
 }
