@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 
-import static common.MainApp.displayResultSet;
 
 public class Manually {
     public static Manually.Builder builder(Statement statement) {
@@ -98,7 +96,7 @@ public class Manually {
                 Communication.hello( "Select discipline");
                 String sql = "SELECT d.id, c.name FROM disciplines as d left join categories as c on d.id_categories = c.id where id_sex = " + sex + ";";
                 ResultSet rs = statement.executeQuery(sql);
-                displayResultSet(rs);
+//                displayResultSet(rs);
                 String discipline =Communication.enter("Select ID" );
 
                 Communication.hello( "Select nationality");
@@ -126,12 +124,12 @@ public class Manually {
                 while( rs.next( )) counter++;
                 if ( counter < Integer.parseInt(numberplayers) ) {
                     Communication.hello( "Not enough players, first add new players");
-                    displayResultSet(rs);
+//                    displayResultSet(rs);
                     return;
                 }
 
                 Communication.hello( "Select players");
-                displayResultSet(rs);
+//                displayResultSet(rs);
 
                 for ( int i = 0; i <  Integer.parseInt(numberplayers); i++ ) {
                     String id_players =Communication.enter("Select ID" );
