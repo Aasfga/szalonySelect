@@ -56,7 +56,7 @@ public class Team {
             disciplineID = (  disciplineID == null ) ? ( (sexID.equals("1")) ? randomise.randomIdFromTable("disciplinemale") : randomise.randomIdFromTable("disciplinefemale") ) : disciplineID;
             nationalityID = ( nationalityID == null ) ? randomise.randomIdFromTable("nationalities") : nationalityID;
 
-            sql = "INSERT INTO teams VALUES(DEFAULT ," + sexID + " , " + disciplineID + " , " + nationalityID + ");";
+            String sql = "INSERT INTO teams VALUES(DEFAULT ," + sexID + " , " + disciplineID + " , " + nationalityID + ");";
             statement.execute(sql);
             System.out.println(sql);
 
