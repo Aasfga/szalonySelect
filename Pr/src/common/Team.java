@@ -3,15 +3,12 @@ package common;
 import common.generators.Preparer;
 import common.generators.Randomise;
 
-import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.Random;
 
-import static common.MainApp.displayResultSet;
 
 public class Team {
 
@@ -76,7 +73,7 @@ public class Team {
             System.out.println(min_players_team + " " + max_players_team);
             sql = "SELECT * from disciplines as d join categories as c on c.id = d.id_categories where id_sex = " + sexID + " and d.id = " + disciplineID + ";";
             rs = statement.executeQuery(sql);
-            displayResultSet(rs);
+//            displayResultSet(rs);
 
 
             int randomnumber_players = random.nextInt(max_players_team + 1 - min_players_team) + min_players_team;
@@ -85,7 +82,7 @@ public class Team {
             ArrayList players = preparer.arrayFromResultSetColumn(rs,1);
 
             while( players.size() < randomnumber_players) {
-                Player.builder(statement).withID(sexID).withNationalityID(nationalityID).add();
+                Player.builder().withSexId(sexID).withNationalityID(nationalityID).add();
                 players.add(preparer.lastUsedDefaultID("players"));
             }
 

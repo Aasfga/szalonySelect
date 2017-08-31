@@ -1,29 +1,19 @@
 package common;
 
-import common.generators.Preparer;
-import common.generators.Randomise;
-
+import common.generators.Communication;
 import java.sql.SQLException;
-import java.sql.Statement;
+
+import static common.MainApp.preparer;
+import static common.MainApp.randomise;
+import static common.MainApp.statement;
 
 public class Player {
 
-//    public static String generateManually(Scanner scanner) {
-//
-//        System.out.println("Give sex ID:");
-//        System.out.println("");
-//        return null;
-//    }
-
-    public static Builder builder(Statement statement){
-        return new Builder(statement);
+    public static Builder builder(){
+        return new Builder();
     }
 
     public static class Builder {
-
-        final private Randomise randomise;
-        final private Preparer preparer;
-        private Statement statement;
         private String sexID;
         private String firstName;
         private String lastName;
@@ -32,13 +22,10 @@ public class Player {
         private String weightDate;
         private String weight;
 
-        public  Builder(Statement statement){
-            this.statement = statement;
-            this.randomise = new Randomise(statement);
-            this.preparer = new Preparer(statement);
+        public  Builder(){
         }
 
-        public Builder withID(String sexID) {
+        public Builder withSexId(String sexID) {
             this.sexID = sexID;
             return this;
         }
@@ -93,8 +80,61 @@ public class Player {
             sql = "INSERT INTO weights VALUES(" + playerID + ", " + bodyMassKg + "." + bodyMassAfterDot + ",\'" + weightDate + "\');";
 
             statement.execute(sql);
+
+            System.out.println( "Success! New player has been added!" );
+        }
+    }
+
+
+    public static void generate() throws SQLException {
+        Player.builder().add();
+    }
+
+    public static void manually() throws SQLException {
+        System.out.println("'RANDOM' for random field");
+        Communication.hello("Player");
+        String sexId = Communication.enter("id of sex","1-male, 2-female, 3-both");
+        String firstName = Communication.enter("first name");
+        String lastName = Communication.enter("first name");
+        String nationalityId = Communication.enter("nationality");
+        String birthDate = Date.manually();
+        String weight = Communication.enter("weight");
+        String weightDate = Date.manually();
+
+
+        //TODO check fields
+
+        Player.Builder builder = Player.builder();
+
+        if( !"RANDOM".equals(sexId)){
+            builder.withSexId(sexId);
         }
 
+        if( !"RANDOM".equals(firstName)){
+            builder.withFirstName(firstName);
+        }
+
+        if( !"RANDOM".equals(lastName)){
+            builder.withLastName(lastName);
+        }
+
+        if( !"RANDOM".equals(nationalityId)){
+            builder.withNationalityID(nationalityId);
+        }
+
+        if( !"RANDOM".equals(birthDate)){
+            builder.withBirthDate(birthDate);
+        }
+
+        if( !"RANDOM".equals(weight)){
+            builder.withWeight(weight);
+        }
+
+        if( !"RANDOM".equals(weightDate)){
+            builder.withWeightDate(weightDate);
+        }
+
+        builder.add();
     }
 
 }
