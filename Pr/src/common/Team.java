@@ -53,12 +53,7 @@ public class Team {
             Preparer preparer = new Preparer(statement);
 
             sexID = ( sexID == null ) ? randomise.randomIdFromTable("sexes") : sexID;
-
-            String sql = "CREATE OR REPLACE VIEW disciplineview AS SELECT id from disciplines where id_sex = " + sexID + ";";
-            statement.execute(sql);
-            String randomdiscipline = randomise.randomIdFromTable("disciplineview");
-
-            disciplineID = ( disciplineID == null ) ?  randomdiscipline  : disciplineID;
+            disciplineID = (  disciplineID == null ) ? ( (sexID.equals("1")) ? randomise.randomIdFromTable("disciplinemale") : randomise.randomIdFromTable("disciplinefemale") ) : disciplineID;
             nationalityID = ( nationalityID == null ) ? randomise.randomIdFromTable("nationalities") : nationalityID;
 
             sql = "INSERT INTO teams VALUES(DEFAULT ," + sexID + " , " + disciplineID + " , " + nationalityID + ");";
@@ -101,3 +96,4 @@ public class Team {
 
 
 }
+

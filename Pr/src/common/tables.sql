@@ -129,3 +129,6 @@ CREATE TABLE IF NOT EXISTS  event_team_result
   PRIMARY KEY (id_event, id_team)
 );
 
+CREATE VIEW disciplinemale AS SELECT id from disciplines where id_sex = 1;
+CREATE VIEW disciplinefemale AS SELECT id from disciplines where id_sex = 2;
+
