@@ -138,7 +138,7 @@ CREATE OR REPLACE FUNCTION event_team_result_insert()
 $event_team_result_insert$
 DECLARE
 
-  discipline_id_fromevent INTEGER := (SELECT id_disciplines FROM event WHERE id = new.id_event);
+  discipline_id_fromevent INTEGER := (SELECT id_disciplines FROM events WHERE id = new.id_event);
 
   discipline_id_fromteams INTEGER := (SELECT id_discipline FROM teams WHERE id = new.id_team);
 
