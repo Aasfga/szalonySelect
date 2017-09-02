@@ -1,8 +1,10 @@
 package common.generators;
 
 import common.Judge;
+import common.Results;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
@@ -10,14 +12,22 @@ import java.util.Scanner;
 
 
 public class Manually {
-    public static Manually.Builder builder(Statement statement) {
-        return new Manually.Builder( statement );
+    public static Builder builder(Statement statement) {
+        return new Builder( statement );
     }
     private static Scanner scanner = new Scanner(System.in);
 
     static class Communication{
         static void hello(String arg){
             System.out.printf("Adding new "+arg+":\n");
+        }
+        static String enter(String word,Boolean rand){
+            System.out.printf("Enter "+word+":(RAND to random)");
+            String s=scanner.next();
+            if (Objects.equals( s, "RAND" ))
+                return null;
+            else
+                return s;
         }
         static String enter(String word){
             System.out.printf("Enter "+word+":");
@@ -30,7 +40,34 @@ public class Manually {
         }
         static void error(SQLException e){
             System.out.println("Something went wrong...Sorry. Try different parameters.");
-            e.printStackTrace();
+        }
+        private static void displayResultSet(ResultSet rs) {
+            try {
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnsNumber = rsmd.getColumnCount();
+
+                for (int i = 1; i <= columnsNumber; i++) {
+
+                    int ile = 15 - rsmd.getColumnName(i).length();
+                    String spaces = String.format("%" + ile + "s", "");
+                    System.out.print(rsmd.getColumnName(i) + spaces);
+                }
+                System.out.println();
+
+                while (rs.next()) {
+
+                    for (int i = 1; i <= columnsNumber; i++) {
+
+                        int ile = 15 - rs.getString(i).length();
+                        String spaces = String.format("%" + ile + "s", "");
+                        System.out.print(rs.getString(i) + spaces);
+                    }
+                    System.out.println();
+                }
+            } catch (SQLException e) {
+//            TODO
+//            e.printStackTrace();
+            }
         }
     }
 
@@ -45,8 +82,8 @@ public class Manually {
 
         public void judge(){
             Communication.hello( "judge" );
-            String first_name=Communication.enter( "first name" );
-            String last_name=Communication.enter( "last name" );;
+            String first_name=Communication.enter( "first name",true );
+            String last_name=Communication.enter( "last name",true );;
             try {
                 Judge.builder(statement).withFirstName(first_name).withLastName( last_name ).add();
             } catch (SQLException e) {
@@ -54,6 +91,32 @@ public class Manually {
                 return;
             }
             System.out.println("Success! " + first_name+ " " + last_name + " added.\n");
+        }
+
+        public void result(){
+            try{
+                Communication.hello( "result" );
+                String sql = "SELECT * FROM events;";
+                ResultSet rs = statement.executeQuery(sql);
+                Communication.displayResultSet(rs);
+                String ev=Communication.enter( "event","id" );
+                sql = "SELECT id_disciplines FROM  events where id=" +ev +";";
+                ResultSet resultSet = statement.executeQuery(sql);
+                resultSet.next();
+                String id_discipline= resultSet.getString(1);
+                sql = "SELECT * FROM teams where id_discipline=" +id_discipline + ";";
+                rs = statement.executeQuery(sql);
+                Communication.displayResultSet(rs);
+                String t=Communication.enter( "team","id" );
+                String r=Communication.enter( "result",true );
+                Results.builder( statement ).
+                        withEventID( ev ).withResult( t ).withTeamID( r ).
+                        add();
+            }catch (SQLException e){
+                Communication.error( e );
+                return;
+            }
+            System.out.println("Success! new result added.\n");
         }
 
         public void category(){
@@ -83,7 +146,7 @@ public class Manually {
                     statement.execute(sql);
                 }
             } catch (SQLException e) {
-               Communication.error( e );
+                Communication.error( e );
             }
             System.out.println("Success! " + name+  "added.\n");
         }

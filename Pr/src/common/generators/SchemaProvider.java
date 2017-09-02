@@ -24,7 +24,9 @@ public class SchemaProvider {
     public void addData() throws SQLException {
         executeFile("data.sql");
     }
-
+    public void addData() throws SQLException {
+        executeFile("views.sql");
+    }
 
     public void clear() throws SQLException {
         executeFile("clear.sql");
