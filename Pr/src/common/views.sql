@@ -1,12 +1,12 @@
 DROP VIEW IF EXISTS gold_medals;
 DROP VIEW IF EXISTS silver_medals;
 DROP VIEW IF EXISTS bronze_medals;
-DROP VIEW IF EXISTS results;
-DROP VIEW IF EXISTS team_category;
-DROP VIEW IF EXISTS players_all;
-DROP VIEW IF EXISTS lol3;
-DROP VIEW IF EXISTS lol2;
-DROP VIEW IF EXISTS lol;
+DROP VIEW IF EXISTS results cascade;
+DROP VIEW IF EXISTS team_category cascade;
+DROP VIEW IF EXISTS players_all cascade;
+DROP VIEW IF EXISTS lol3 cascade;
+DROP VIEW IF EXISTS lol2 cascade;
+DROP VIEW IF EXISTS lol cascade;
 
 
 CREATE VIEW team_category AS SELECT
@@ -17,7 +17,7 @@ CREATE VIEW team_category AS SELECT
             join categories on id_categories=categories.id;
 
 CREATE VIEW results AS SELECT
-country, category,id_final as final, finals.name, event_team_result.result as result
+ country, category,id_final as final, finals.name, event_team_result.result as result
 from team_category
 join event_team_result on id_team=team
 join events on id_event=events.id
