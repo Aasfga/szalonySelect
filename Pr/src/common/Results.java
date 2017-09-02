@@ -6,7 +6,6 @@ import common.generators.Randomise;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -69,9 +68,6 @@ public class Results {
                     break;
                 }
 
-            }
-            else{
-                //TODO
             }
             String[] tab= {"1","2","3","0","4"};
             int x=randomise.randomFromBetween(0,4);

@@ -32,7 +32,7 @@ public class MainApp {
             schemaProvider.clear();
             schemaProvider.create();
             schemaProvider.addData();
-
+            schemaProvider.views();
 //            new Player.Builder(statement).add();
 //            Player.builder(statement).add();
 //            Player.builder(statement).withFirstName("Filip").add();
@@ -278,7 +278,10 @@ public class MainApp {
         set.add("judges");
         set.add("events");
         set.add("places");
-        set.add("medals");
+        set.add("results");
+        set.add("gold_medals");
+        set.add("silver_medals");
+        set.add("bronze_medals");
         return set;
     }
 
