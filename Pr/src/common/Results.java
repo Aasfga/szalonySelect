@@ -61,6 +61,11 @@ public class Results {
                     Random random = new Random();
                     int rand = Math.abs(random.nextInt()%(ids.size()-1));
                     id_team=ids.get(rand);
+                    sql = "SELECT * FROM event_team_result where id_event=" +id_event +" and id_team="+id_team+ ";";
+                    rs = statement.executeQuery(sql);
+                    ids = preparer.arrayFromResultSetColumn(rs,1);
+                    if(ids.size()==1)
+                        continue;
                     break;
                 }
 
