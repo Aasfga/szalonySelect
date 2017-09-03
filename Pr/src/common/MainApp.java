@@ -34,6 +34,17 @@ public class MainApp {
             schemaProvider.create();
             schemaProvider.addData();
             schemaProvider.views();
+            for (int i=0;i<1000;i++){
+                Player.generate();
+                Judge.generate();
+                Team.generate();
+            }
+            for (int i=0;i<200;i++){
+                Event.generate();
+            }
+            for (int i=0;i<2000;i++){
+                Results.generate();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -254,23 +265,6 @@ public class MainApp {
         set.add("judges");
         set.add("events");
         return set;
-    }
-
-
-    @Deprecated
-    private static void addNationality() {
-        System.out.printf("Enter nationality name:");
-        String name = scanner.next();
-
-        try {
-            String sql = "INSERT INTO nationalities VALUES( DEFAULT, '" + name + "');";
-            statement.execute(sql);
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...Sorry. Try different name.");
-            e.printStackTrace();
-            return;
-        }
-        System.out.println("Success! " + name + " added.\n");
     }
 
     private static void failureCommunicate() {

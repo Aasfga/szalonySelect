@@ -4,9 +4,12 @@ import common.generators.Communication;
 import common.generators.Preparer;
 import common.generators.Randomise;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Objects;
 
 import static common.MainApp.statement;
 
@@ -83,8 +86,16 @@ public class Event {
             id_discipline = ( id_discipline == null ) ? randomise.randomIdFromTable("disciplines") : id_discipline;
             id_final = ( id_final == null ) ? randomise.randomIdFromTable("finals") : id_final;
             id_judge = (id_judge == null) ? randomise.randomIdFromTable("judges")   : id_judge; //check not null
-
-            String sql = "INSERT INTO events VALUES(DEFAULT ," + id_place + ", \'" + start_time + "\', \'" + end_time + "\'," + id_discipline + "," + id_final + ");";
+            String sql;
+            if(Objects.equals( id_final, "1" )){
+                sql = "SELECT * FROM events join finals on id_final=finals.id where id_disciplines=" +id_discipline+ ";";
+                ResultSet rs = statement.executeQuery(sql);
+                ArrayList<String> ids = preparer.arrayFromResultSetColumn(rs,1);
+                if(ids.size()!=0){
+                    return;
+                }
+            }
+            sql = "INSERT INTO events VALUES(DEFAULT ," + id_place + ", \'" + start_time + "\', \'" + end_time + "\'," + id_discipline + "," + id_final + ");";
             statement.execute(sql);
 
             String eventID = preparer.lastUsedDefaultID("events");
