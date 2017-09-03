@@ -169,6 +169,7 @@ public class MainApp {
         System.out.println("3 - Team");
         System.out.println("4 - Event");
         System.out.println("5 - Result");
+        System.out.println("6 - Category");
 
         String table = scanner.next();
         while (true) {
@@ -179,6 +180,9 @@ public class MainApp {
 
             if ("1".equals(table) || "2".equals(table) || "3".equals(table) || "4".equals(table) || "5".equals(table)) {
                 break;
+            }
+            if ( "6".equals(table)){
+                Category.manually();
             }
 
             System.out.println("Please, try again.");
@@ -208,7 +212,7 @@ public class MainApp {
                     Player.generate();
                     break;
                 case "2":
-//                    Judge.generate();
+                    Judge.generate();
                     break;
                 case "3":
 //                    Team.generate();
@@ -217,7 +221,7 @@ public class MainApp {
 //                    Event.generate();
                     break;
                 case "5":
-//                    Results.generate();
+                    Results.generate();
             }
         } else {
             switch (table){
@@ -225,7 +229,7 @@ public class MainApp {
                     Player.manually();
                     break;
                 case "2":
-//                    Judge.manually();
+                    Judge.manually();
                     break;
                 case "3":
 //                    Team.manually();
@@ -234,7 +238,7 @@ public class MainApp {
 //                    Event.manually();
                     break;
                 case "5":
-//                    Results.manually();
+                    Results.manually();
             }
         }
 

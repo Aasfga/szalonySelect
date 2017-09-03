@@ -44,7 +44,7 @@ public class Results {
             this.result = result;
             return this;
         }
-        public void generate() throws SQLException {
+        public void add() throws SQLException {
             if( id_event == null&&id_team==null ){
                 while(true){
                     id_event = randomise.randomIdFromTable("events");
@@ -84,7 +84,7 @@ public class Results {
                 Communication.hello( "result" );
                 String sql = "SELECT * FROM events;";
                 ResultSet rs = statement.executeQuery(sql);
-                Communication.displayResultSet(rs);
+                Preparer.displayResultSet(rs);
                 String ev=Communication.enter( "event","id" );
                 sql = "SELECT id_disciplines FROM  events where id=" +ev +";";
                 ResultSet resultSet = statement.executeQuery(sql);
@@ -92,12 +92,12 @@ public class Results {
                 String id_discipline= resultSet.getString(1);
                 sql = "SELECT * FROM teams where id_discipline=" +id_discipline + ";";
                 rs = statement.executeQuery(sql);
-                Communication.displayResultSet(rs);
+                Preparer.displayResultSet(rs);
                 String t=Communication.enter( "team","id" );
                 String r=Communication.enter( "result",true );
                 Results.builder( statement ).
                         withEventID( ev ).withResult( t ).withTeamID( r ).
-                        generate();
+                        add();
             }catch (SQLException e){
                 Communication.error( e );
                 return;
@@ -105,5 +105,11 @@ public class Results {
             System.out.println("Success! new result added.\n");
         }
 
+    }
+    public static void manually()throws SQLException{
+        builder( MainApp.statement ).manually();
+    }
+    public static void generate()throws SQLException{
+        builder( MainApp.statement ).add();
     }
 }

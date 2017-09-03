@@ -46,7 +46,7 @@ public class Judge {
             String sql = "INSERT INTO Judges VALUES(DEFAULT, \'" + firstName + "\',\' " + lastName + "\')";
             statement.execute( sql );
         }
-        public void manually(){
+        public void manually()throws SQLException{
             Communication.hello( "judge" );
             String first_name= Communication.enter( "first name",true );
             String last_name= Communication.enter( "last name",true );;
@@ -59,4 +59,11 @@ public class Judge {
             System.out.println("Success! " + first_name+ " " + last_name + " added.\n");
         }
     }
+    public static void manually()throws SQLException{
+        builder( MainApp.statement ).manually();
+    }
+    public static void generate()throws SQLException{
+        builder( MainApp.statement ).generate();
+    }
+
 }
