@@ -31,32 +31,5 @@ public class Communication{
     public static void error(SQLException e){
         System.out.println("Something went wrong...Sorry. Try different parameters.");
     }
-    public static void displayResultSet(ResultSet rs) {
-        try {
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-
-            for (int i = 1; i <= columnsNumber; i++) {
-
-                int ile = 15 - rsmd.getColumnName(i).length();
-                String spaces = String.format("%" + ile + "s", "");
-                System.out.print(rsmd.getColumnName(i) + spaces);
-            }
-            System.out.println();
-
-            while (rs.next()) {
-
-                for (int i = 1; i <= columnsNumber; i++) {
-
-                    int ile = 15 - rs.getString(i).length();
-                    String spaces = String.format("%" + ile + "s", "");
-                    System.out.print(rs.getString(i) + spaces);
-                }
-                System.out.println();
-            }
-        } catch (SQLException e) {
-//            TODO
-//            e.printStackTrace();
-        }
-    }
+    
 }
