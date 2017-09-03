@@ -58,18 +58,12 @@ public class Team {
 
             String sql = "INSERT INTO teams VALUES(DEFAULT ," + sexID + " , " + disciplineID + " , " + nationalityID + ");";
             statement.execute(sql);
-            System.out.println(sql);
 
             sql = "SELECT * from disciplines as d join categories as c on c.id = d.id_categories where id_sex = " + sexID + " and d.id = " + disciplineID + ";";
             ResultSet rs = statement.executeQuery(sql);
             rs.next();
             int min_players_team = rs.getInt(8);
             int max_players_team = rs.getInt(9);
-            System.out.println(min_players_team + " " + max_players_team);
-            sql = "SELECT * from disciplines as d join categories as c on c.id = d.id_categories where id_sex = " + sexID + " and d.id = " + disciplineID + ";";
-            rs = statement.executeQuery(sql);
-//            displayResultSet(rs);
-
 
             int randomnumber_players = random.nextInt(max_players_team + 1 - min_players_team) + min_players_team;
             sql = " SELECT id from players where id_sex = " + sexID + " and id_nationality = " + nationalityID+ ";";
@@ -83,13 +77,12 @@ public class Team {
 
             String teamID = preparer.lastUsedDefaultID("teams");
 
-
             while( randomnumber_players-- > 0  ) {
                 sql = "INSERT INTO player_team values ( " + players.get(randomnumber_players) + " , " + teamID + " );";
                     statement.execute(sql);
-                    System.out.println(sql);
                 }
 
+            System.out.println( "Success! New teams has been added!" );
         }
 
     }
