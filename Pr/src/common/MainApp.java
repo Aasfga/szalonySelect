@@ -42,7 +42,7 @@ public class MainApp {
             for (int i=0;i<200;i++){
                 Event.generate();
             }
-            for (int i=0;i<2000;i++){
+            for (int i=0;i<1500;i++){
                 Results.generate();
             }
 
