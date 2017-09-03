@@ -36,13 +36,13 @@ CREATE VIEW lol3 AS
  final,category, max(result) as scoremax from results where final=2 group by category,final;
 
 CREATE VIEW gold_medals AS SELECT country,lol.category
- from results join lol on results.final=lol.final
+ from results join lol on results.final=lol.final and results.category=lol.category
         where results.result=lol.scoremax;
 
 CREATE VIEW silver_medals AS SELECT country,lol2.category
- from results join lol2 on results.final=lol2.final
+ from results join lol2 on results.final=lol2.final and results.category=lol2.category
        where results.result=lol2.scoremax;
 
 CREATE VIEW bronze_medals AS SELECT country,lol3.category
- from results join lol3 on results.final=lol3.final
+ from results join lol3 on results.final=lol3.final and results.category=lol3.category
        where results.result=lol3.scoremax;
