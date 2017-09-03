@@ -40,19 +40,26 @@ public class Category {
                 statement.execute( sql );
 
                 String categoryID = preparer.lastUsedDefaultID( "categories" );
-                if (!Objects.equals( sex, "3" )) {
-                    sql = "INSERT INTO disciplines VALUES(DEFAULT ," + sex + "," + categoryID + ");";
-                    statement.execute( sql );
-                } else {
+                if (Objects.equals( sex, "3" )) {
                     sql = "INSERT INTO disciplines VALUES(DEFAULT ," + "1" + "," + categoryID + ");";
                     statement.execute( sql );
                     sql = "INSERT INTO disciplines VALUES(DEFAULT ," + "2" + "," + categoryID + ");";
                     statement.execute( sql );
+                } else if (Objects.equals( sex, "2" )||Objects.equals( sex, "1" )) {
+                    sql = "INSERT INTO disciplines VALUES(DEFAULT ," + sex + "," + categoryID + ");";
+                    statement.execute( sql );
+                }
+                else{
+                    Communication.error( new SQLException(  ) );
+                    return;
                 }
             } catch (SQLException e) {
                 Communication.error( e );
             }
-            System.out.println( "Success! " + name + "added.\n" );
+            System.out.println( "Success! " + name + " added.\n" );
         }
+    }
+    public static void manually(){
+        builder( MainApp.statement ).manually();
     }
 }
