@@ -104,7 +104,7 @@ public class Player {
 
         //TODO check fields
 
-        Player.Builder builder = Player.builder();
+        Builder builder = Player.builder();
 
         if( !"RANDOM".equals(sexId)){
             builder.withSexId(sexId);

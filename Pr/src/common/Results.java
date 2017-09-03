@@ -1,5 +1,6 @@
 package common;
 
+import common.generators.Communication;
 import common.generators.Preparer;
 import common.generators.Randomise;
 
@@ -31,19 +32,19 @@ public class Results {
             this.preparer = new Preparer(statement);
         }
 
-        public Results.Builder withTeamID(String id_team) {
+        public Builder withTeamID(String id_team) {
             this.id_team = id_team;
             return this;
         }
-        public Results.Builder withEventID(String id_event) {
+        public Builder withEventID(String id_event) {
             this.id_event = id_event;
             return this;
         }
-        public Results.Builder withResult(String result) {
+        public Builder withResult(String result) {
             this.result = result;
             return this;
         }
-        public void add() throws SQLException {
+        public void generate() throws SQLException {
             if( id_event == null&&id_team==null ){
                 while(true){
                     id_event = randomise.randomIdFromTable("events");
@@ -77,6 +78,31 @@ public class Results {
             statement.execute(sql);
 
 
+        }
+        public void manually(){
+            try{
+                Communication.hello( "result" );
+                String sql = "SELECT * FROM events;";
+                ResultSet rs = statement.executeQuery(sql);
+                Communication.displayResultSet(rs);
+                String ev=Communication.enter( "event","id" );
+                sql = "SELECT id_disciplines FROM  events where id=" +ev +";";
+                ResultSet resultSet = statement.executeQuery(sql);
+                resultSet.next();
+                String id_discipline= resultSet.getString(1);
+                sql = "SELECT * FROM teams where id_discipline=" +id_discipline + ";";
+                rs = statement.executeQuery(sql);
+                Communication.displayResultSet(rs);
+                String t=Communication.enter( "team","id" );
+                String r=Communication.enter( "result",true );
+                Results.builder( statement ).
+                        withEventID( ev ).withResult( t ).withTeamID( r ).
+                        generate();
+            }catch (SQLException e){
+                Communication.error( e );
+                return;
+            }
+            System.out.println("Success! new result added.\n");
         }
 
     }
