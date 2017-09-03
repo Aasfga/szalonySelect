@@ -1,6 +1,5 @@
 package common;
 
-import common.generators.Manually;
 import common.generators.Preparer;
 import common.generators.Randomise;
 import common.generators.SchemaProvider;
@@ -9,6 +8,8 @@ import java.sql.*;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
+
+import static common.generators.Preparer.displayResultSet;
 
 public class MainApp {
 
@@ -299,34 +300,6 @@ public class MainApp {
         return set;
     }
 
-    private static void displayResultSet(ResultSet rs) {
-        try {
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-
-            for (int i = 1; i <= columnsNumber; i++) {
-
-                int ile = 15 - rsmd.getColumnName(i).length();
-                String spaces = String.format("%" + ile + "s", "");
-                System.out.print(rsmd.getColumnName(i) + spaces);
-            }
-            System.out.println();
-
-            while (rs.next()) {
-
-                for (int i = 1; i <= columnsNumber; i++) {
-
-                    int ile = 15 - rs.getString(i).length();
-                    String spaces = String.format("%" + ile + "s", "");
-                    System.out.print(rs.getString(i) + spaces);
-                }
-                System.out.println();
-            }
-        } catch (SQLException e) {
-//            TODO
-//            e.printStackTrace();
-        }
-    }
 
     @Deprecated
     private static void addNationality() {
