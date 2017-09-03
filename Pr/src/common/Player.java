@@ -1,6 +1,8 @@
 package common;
 
 import common.generators.Communication;
+import sun.applet.Main;
+
 import java.sql.SQLException;
 
 import static common.MainApp.preparer;
@@ -93,10 +95,11 @@ public class Player {
     public static void manually() throws SQLException {
         System.out.println("'RANDOM' for random field");
         Communication.hello("Player");
-        String sexId = Communication.enter("id of sex","1-male, 2-female, 3-both");
+        String sexId = Communication.enter("id of sex","1-male, 2-female");
         String firstName = Communication.enter("first name");
         String lastName = Communication.enter("first name");
-        String nationalityId = Communication.enter("nationality");
+        MainApp.displayTable("nationalities");
+        String nationalityId = Communication.enter("nationality ID");
         String birthDate = Date.manually();
         String weight = Communication.enter("weight");
         String weightDate = Date.manually();
