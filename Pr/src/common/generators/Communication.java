@@ -1,5 +1,7 @@
 package common.generators;
 
+import common.MainApp;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -10,6 +12,15 @@ import static common.MainApp.scanner;
 public class Communication{
     public static void hello(String arg){
         System.out.printf("Adding new "+arg+":\n");
+    }
+    public static String enter(String word,Boolean rand,String table) throws SQLException{
+        MainApp.displayTable(table);
+        System.out.printf("Enter "+word+":(RAND to random)");
+        String s=scanner.next();
+        if (Objects.equals( s, "RAND" ))
+            return null;
+        else
+            return s;
     }
     public static String enter(String word,Boolean rand){
         System.out.printf("Enter "+word+":(RAND to random)");

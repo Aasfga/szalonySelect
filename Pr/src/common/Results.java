@@ -86,6 +86,9 @@ public class Results {
                 ResultSet rs = statement.executeQuery(sql);
                 Preparer.displayResultSet(rs);
                 String ev=Communication.enter( "event","id" );
+                if(!new Preparer(statement).isTableContainsGivenId("events",ev)) {
+                    Communication.error( new SQLException() );
+                }
                 sql = "SELECT id_disciplines FROM  events where id=" +ev +";";
                 ResultSet resultSet = statement.executeQuery(sql);
                 resultSet.next();
@@ -94,6 +97,9 @@ public class Results {
                 rs = statement.executeQuery(sql);
                 Preparer.displayResultSet(rs);
                 String t=Communication.enter( "team","id" );
+                if(!new Preparer(statement).isTableContainsGivenId("teams",t)){
+                    Communication.error( new SQLException(  ) );
+                }
                 String r=Communication.enter( "result",true );
                 Results.builder( statement ).
                         withEventID( ev ).withResult( t ).withTeamID( r ).
