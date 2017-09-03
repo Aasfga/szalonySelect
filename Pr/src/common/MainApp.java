@@ -166,7 +166,7 @@ public class MainApp {
             if ("1".equals(table) || "2".equals(table) || "3".equals(table) || "4".equals(table) || "5".equals(table)) {
                 break;
             }
-            if ("1".equals(table)){
+            if ("6".equals(table)){
                 Category.manually();
                 return;
             }
