@@ -158,84 +158,88 @@ public class MainApp {
         }
     }
 
-    private static void displayTable(String table) throws SQLException {
-        String sql = "SELECT * FROM " + table + ";";
-        ResultSet rs = statement.executeQuery(sql);
-        displayResultSet(rs);
-    }
 
 
-    private static void addFunction() {
+    private static void addFunction() throws SQLException {
 
-        String table;
-        while(true) {
-            System.out.println("Choose table to add something.");
-            System.out.println(addSet);
-            table = scanner.next();
+        System.out.println("Where you want to add something? (BACK for back)");
+        System.out.println("1 - Player");
+        System.out.println("2 - Judge");
+        System.out.println("3 - Team");
+        System.out.println("4 - Event");
+        System.out.println("5 - Result");
 
-            if (addSet.contains(table)) {
-                break;
-            }
+        String table = scanner.next();
+        while (true) {
 
             if ("BACK".equals(table)) {
                 return;
             }
-            failureCommunicate();
+
+            if ("1".equals(table) || "2".equals(table) || "3".equals(table) || "4".equals(table) || "5".equals(table)) {
+                break;
+            }
+
+            System.out.println("Please, try again.");
+            table = scanner.next();
         }
 
-        while (true) {
-            String choice;
-            while(true) {
-                System.out.println("Enter 'GENERATE' for generating automatically,\n 'MANUALLY' for adding fields by yourself\n or 'BACK' for back");
-                choice = scanner.next();
 
-                if ("GENERATE".equals(choice) ) {
-                    //TODO
-                    return;
-                }
+        System.out.println("Choose 1 for generate automatically, or 2 for do it manually. (BACK for back)");
 
-                if ("MANUALLY".equals(choice)) {
-                    //TODO
-                    return;
-                }
+        String choice = scanner.next();
+        while( true ) {
 
-                if ("BACK".equals(table)) {
-                    return;
-                }
+            if ("BACK".equals(choice)) {
+                return;
+            }
 
-                failureCommunicate();
+            if ("1".equals(choice) || "2".equals(choice)) {
+                break;
+            }
+            System.out.println("Please, try again.");
+            choice = scanner.next();
+        }
+
+        if( "1".equals(choice)){
+            switch (table){
+                case "1":
+                    Player.generate();
+                    break;
+                case "2":
+//                    Judge.generate();
+                    break;
+                case "3":
+//                    Team.generate();
+                    break;
+                case "4":
+//                    Event.generate();
+                    break;
+                case "5":
+//                    Results.generate();
+            }
+        } else {
+            switch (table){
+                case "1":
+                    Player.manually();
+                    break;
+                case "2":
+//                    Judge.manually();
+                    break;
+                case "3":
+//                    Team.manually();
+                    break;
+                case "4":
+//                    Event.manually();
+                    break;
+                case "5":
+//                    Results.manually();
             }
         }
 
-//            switch (choice) {
-//                case "1":
-//                    addNationality();
-//                    break;
-//                case "2":
-//                    Manually.builder(statement).category();
-//                    break;
-//                case "3":
-//                    //TODO
-//                    break;
-//                case "4":
-//                    //TODO
-//                    break;
-//                case "5":
-//                    Manually.builder(statement).judge();
-//                    break;
-//                case "6":
-//                    //TODO
-//                    break;
-//                case "7":
-//                    //TODO
-//                    break;
-//                default:
-//                    break;
-//            }
     }
 
     private static void updateFunction() {
-
 
         System.out.println("From where you want to update something?");
 //        displayNumberFunction();
@@ -342,5 +346,11 @@ public class MainApp {
 
     private static void failureCommunicate() {
         System.out.println("Something went wrong :( Try with different parameters.");
+    }
+
+    private static void displayTable(String table) throws SQLException {
+        String sql = "SELECT * FROM " + table + ";";
+        ResultSet rs = statement.executeQuery(sql);
+        displayResultSet(rs);
     }
 }
