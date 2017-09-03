@@ -97,18 +97,22 @@ public class Event {
         String id_place= Communication.enter( "Place ID",true,"places"  );
         if(!new Preparer(statement).isTableContainsGivenId("places",id_place)) {
             Communication.error( new SQLException() );
+            return;
         }
         String id_discipline=Communication.enter( "Discipline ID",true,"disciplines"  ) ;
         if(!new Preparer(statement).isTableContainsGivenId("disciplines",id_discipline)){
             Communication.error( new SQLException(  ) );
+            return;
         }
         String id_final=Communication.enter( "Final ID",true,"finals"  );
         if(!new Preparer(statement).isTableContainsGivenId("finals",id_final)){
             Communication.error( new SQLException(  ) );
+            return;
         }
         String id_judge=Communication.enter( "Judge ID",true,"judges"  );
         if(!new Preparer(statement).isTableContainsGivenId("judges",id_judge)){
             Communication.error( new SQLException(  ) );
+            return;
         }
         builder( statement ).
                 withPlaceID(id_place).
