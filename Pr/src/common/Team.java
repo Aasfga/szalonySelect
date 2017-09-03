@@ -102,7 +102,7 @@ public class Team {
                 Communication.hello( "Select nationality");
                 sql = "SELECT * FROM nationalities;";
                 rs = statement.executeQuery(sql);
-                displayResultSet(rs);
+//                displayResultSet(rs);
                 String nationalities =Communication.enter("Select ID" );
 
                 sql = "INSERT INTO teams VALUES(DEFAULT ," + sex + "," + discipline + "," + nationalities+ ");";
@@ -143,6 +143,14 @@ public class Team {
         }
 
     }
+
+    public static void manually()throws SQLException{
+        builder( MainApp.statement ).manually();
+    }
+    public static void generate()throws SQLException{
+        builder( MainApp.statement ).add();
+    }
+
 
 }
 
