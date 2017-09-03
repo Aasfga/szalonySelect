@@ -206,7 +206,7 @@ public class MainApp {
                     Judge.generate();
                     break;
                 case "3":
-                    Team.builder(statement).add();
+                    Team.generate();
                     break;
                 case "4":
                     Event.builder(statement).add();
@@ -225,7 +225,7 @@ public class MainApp {
                     Judge.manually();
                     break;
                 case "3":
-                    Team.builder(statement).manually();
+                    Team.manually();
                     break;
                 case "4":
                     Event.manually();
