@@ -17,7 +17,7 @@ CREATE VIEW team_category AS SELECT
             join categories on id_categories=categories.id;
 
 CREATE VIEW results AS SELECT
- country, category,id_final as final, finals.name, event_team_result.result as result
+ country, category,id_final as final, finals.name, event_team_result.result as points
  from team_category
  join event_team_result on id_team=team
  join events on id_event=events.id
