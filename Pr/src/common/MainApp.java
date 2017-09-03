@@ -34,17 +34,6 @@ public class MainApp {
             schemaProvider.create();
             schemaProvider.addData();
             schemaProvider.views();
-//            new Player.Builder(statement).add();
-//            Player.builder(statement).add();
-//            Player.builder(statement).withFirstName("Filip").add();
-//
-//            Judge.builder(statement).add();
-//            Judge.builder(statement).withFirstName("Marcin").add();
-//
-//            Event.builder(statement).add();
-//
-//            Manually.builder(statement).judge();
-//            Manually.builder(statement).category();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +103,6 @@ public class MainApp {
             System.out.println("Select function:\n");
             System.out.println("1 - Display database");
             System.out.println("2 - Add data");
-            System.out.println("3 - Delete data\n");
             System.out.println("or EXIT for exit");
 
             choice = scanner.next();
@@ -125,9 +113,6 @@ public class MainApp {
                         break;
                     case "2":
                         addFunction();
-                        break;
-                    case "3":
-                        updateFunction();
                         break;
                     default:
                         break;
@@ -169,7 +154,6 @@ public class MainApp {
         System.out.println("3 - Team");
         System.out.println("4 - Event");
         System.out.println("5 - Result");
-        System.out.println("6 - Category");
 
         String table = scanner.next();
         while (true) {
@@ -180,9 +164,6 @@ public class MainApp {
 
             if ("1".equals(table) || "2".equals(table) || "3".equals(table) || "4".equals(table) || "5".equals(table)) {
                 break;
-            }
-            if ( "6".equals(table)){
-                Category.manually();
             }
 
             System.out.println("Please, try again.");
@@ -212,16 +193,16 @@ public class MainApp {
                     Player.generate();
                     break;
                 case "2":
-                    Judge.generate();
+                    Judge.builder(statement).generate();
                     break;
                 case "3":
-//                    Team.generate();
+                    Team.builder(statement).add();
                     break;
                 case "4":
-//                    Event.generate();
+                    Event.builder(statement).add();
                     break;
                 case "5":
-                    Results.generate();
+                    Results.builder(statement).generate();
             }
         } else {
             switch (table){
@@ -229,53 +210,19 @@ public class MainApp {
                     Player.manually();
                     break;
                 case "2":
-                    Judge.manually();
+                    Judge.builder(statement).manually();
                     break;
                 case "3":
-//                    Team.manually();
+                    Team.builder(statement).manually();
                     break;
                 case "4":
 //                    Event.manually();
                     break;
                 case "5":
-                    Results.manually();
+                    Results.builder(statement).manually();
             }
         }
 
-    }
-
-    private static void updateFunction() {
-
-        System.out.println("From where you want to update something?");
-//        displayNumberFunction();
-
-        String wybor = scanner.next();
-
-        switch (wybor) {
-            case "1":
-                //TODO
-                break;
-            case "2":
-                //TODO
-                break;
-            case "3":
-                //TODO
-                break;
-            case "4":
-                //TODO
-                break;
-            case "5":
-                //TODO
-                break;
-            case "6":
-                //TODO
-                break;
-            case "7":
-                //TODO
-                break;
-            default:
-                break;
-        }
     }
 
     private static Set<String> getDisplayableTables() {
