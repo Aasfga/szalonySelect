@@ -1,3 +1,4 @@
+
 package common;
 
 import common.generators.Preparer;
@@ -123,7 +124,12 @@ public class MainApp {
                         displayFunction();
                         break;
                     case "2":
-                        addFunction();
+                        try
+                        {
+                            addFunction();
+                        }catch( SQLException e ) {
+                            System.out.println("Wrong Data");
+                        }
                         break;
                     default:
                         break;

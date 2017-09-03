@@ -79,35 +79,30 @@ public class Results {
 
 
         }
-        public void manually(){
-            try{
-                Communication.hello( "result" );
-                String sql = "SELECT * FROM events;";
-                ResultSet rs = statement.executeQuery(sql);
-                Preparer.displayResultSet(rs);
-                String ev=Communication.enter( "event","id" );
-                if(!new Preparer(statement).isTableContainsGivenId("events",ev)) {
-                    Communication.error( new SQLException() );
-                }
-                sql = "SELECT id_disciplines FROM  events where id=" +ev +";";
-                ResultSet resultSet = statement.executeQuery(sql);
-                resultSet.next();
-                String id_discipline= resultSet.getString(1);
-                sql = "SELECT * FROM teams where id_discipline=" +id_discipline + ";";
-                rs = statement.executeQuery(sql);
-                Preparer.displayResultSet(rs);
-                String t=Communication.enter( "team","id" );
-                if(!new Preparer(statement).isTableContainsGivenId("teams",t)){
-                    Communication.error( new SQLException(  ) );
-                }
-                String r=Communication.enter( "result",true );
-                Results.builder( statement ).
-                        withEventID( ev ).withResult( t ).withTeamID( r ).
-                        add();
-            }catch (SQLException e){
-                Communication.error( e );
-                return;
+        public void manually() throws SQLException {
+            Communication.hello("result");
+            String sql = "SELECT * FROM events;";
+            ResultSet rs = statement.executeQuery(sql);
+            Preparer.displayResultSet(rs);
+            String ev = Communication.enter("event", "id");
+            if (!new Preparer(statement).isTableContainsGivenId("events", ev)) {
+                Communication.error(new SQLException());
             }
+            sql = "SELECT id_disciplines FROM  events where id=" + ev + ";";
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            String id_discipline = resultSet.getString(1);
+            sql = "SELECT * FROM teams where id_discipline=" + id_discipline + ";";
+            rs = statement.executeQuery(sql);
+            Preparer.displayResultSet(rs);
+            String t = Communication.enter("team", "id");
+            if (!new Preparer(statement).isTableContainsGivenId("teams", t)) {
+                Communication.error(new SQLException());
+            }
+            String r = Communication.enter("result", true);
+            Results.builder(statement).
+                    withEventID(ev).withResult(t).withTeamID(r).
+                    add();
             System.out.println("Success! new result added.\n");
         }
 
