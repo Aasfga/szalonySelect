@@ -37,7 +37,7 @@ public class Preparer {
         return s.matches(pattern);
     }
 
-    public boolean isTableContainsGivenId(String tableName, String id) throws SQLException {
+    public Boolean isTableContainsGivenId(String tableName, String id) throws SQLException {
         String sql = "SELECT * FROM " + tableName + ";";
         ResultSet rs =  statement.executeQuery(sql);
 

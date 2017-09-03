@@ -166,6 +166,11 @@ public class MainApp {
                 break;
             }
 
+            if ( "6".equals(table)){
+                Category.manually();
+                return;
+            }
+
             System.out.println("Please, try again.");
             table = scanner.next();
         }
@@ -200,9 +205,10 @@ public class MainApp {
                     break;
                 case "4":
                     Event.builder(statement).add();
+                    Event.generate();
                     break;
                 case "5":
-                    Results.builder(statement).generate();
+//                    Results.builder(statement).generate();
             }
         } else {
             switch (table){
@@ -216,7 +222,7 @@ public class MainApp {
                     Team.builder(statement).manually();
                     break;
                 case "4":
-//                    Event.manually();
+                    Event.manually();
                     break;
                 case "5":
                     Results.builder(statement).manually();
@@ -272,7 +278,7 @@ public class MainApp {
         System.out.println("Something went wrong :( Try with different parameters.");
     }
 
-    private static void displayTable(String table) throws SQLException {
+    public static void displayTable(String table) throws SQLException {
         String sql = "SELECT * FROM " + table + ";";
         ResultSet rs = statement.executeQuery(sql);
         displayResultSet(rs);

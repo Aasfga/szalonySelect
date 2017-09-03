@@ -1,11 +1,14 @@
 package common;
 
+import common.generators.Communication;
 import common.generators.Preparer;
 import common.generators.Randomise;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+
+import static common.MainApp.statement;
 
 public class Event {
 
@@ -89,5 +92,34 @@ public class Event {
         }
 
     }
+    public static void manually()throws SQLException{
+        String id_place= Communication.enter( "Place ID",true,"places"  );
+        if(!new Preparer(statement).isTableContainsGivenId("places",id_place)) {
+            Communication.error( new SQLException() );
+        }
+        String id_discipline=Communication.enter( "Discipline ID",true,"disciplines"  ) ;
+        if(!new Preparer(statement).isTableContainsGivenId("disciplines",id_discipline)){
+            Communication.error( new SQLException(  ) );
+        }
+        String id_final=Communication.enter( "Final ID",true,"finals"  );
+        if(!new Preparer(statement).isTableContainsGivenId("finals",id_final)){
+            Communication.error( new SQLException(  ) );
+        }
+        String id_judge=Communication.enter( "Judge ID",true,"judges"  );
+        if(!new Preparer(statement).isTableContainsGivenId("judges",id_judge)){
+            Communication.error( new SQLException(  ) );
+        }
+        builder( statement ).
+                withPlaceID(id_place).
+                withStartTime( Communication.enter( "Start Time",true  ) ).
+                withEndTime( Communication.enter( "End Time",true  ) ).
+                withJudgeID( id_judge ).
+                withFinalID( id_final ).
+                withDisciplineID( id_discipline).add();
+    }
+    public static void generate()throws SQLException{
+        builder( statement ).add();
+    }
+
 
 }
