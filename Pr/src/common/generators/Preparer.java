@@ -53,9 +53,12 @@ public class Preparer {
 
             for (int i = 1; i <= columnsNumber; i++) {
 
-                int ile = 15 - rsmd.getColumnName(i).length();
-                String spaces = String.format("%" + ile + "s", "");
-                System.out.print(rsmd.getColumnName(i) + spaces);
+                int ile = 30 - rsmd.getColumnName(i).length();
+                StringBuilder sb = new StringBuilder();
+                for(int j = 0; j < ile; j++){
+                    sb.append(" ");
+                }
+                System.out.print(rsmd.getColumnName(i) + sb.toString());
             }
             System.out.println();
 
@@ -63,9 +66,12 @@ public class Preparer {
 
                 for (int i = 1; i <= columnsNumber; i++) {
 
-                    int ile = 15 - rs.getString(i).length();
-                    String spaces = String.format("%" + ile + "s", "");
-                    System.out.print(rs.getString(i) + spaces);
+                    int ile = 30 - rs.getString(i).length();
+                    StringBuilder sb = new StringBuilder();
+                    for(int j = 0; j < ile; j++){
+                        sb.append(" ");
+                    }
+                    System.out.print(rs.getString(i) + sb.toString() );
                 }
                 System.out.println();
             }

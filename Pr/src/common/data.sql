@@ -282,12 +282,12 @@ INSERT INTO nationalities VALUES (DEFAULT, 'Zimbabwe');
 
 
 INSERT INTO places VALUES (DEFAULT, 'Stadion Olimpijski "Fiszt"', 1);
-INSERT INTO places VALUES (DEFAULT, 'Pałac lodowy "Bolszoj"',1);
-INSERT INTO places VALUES (DEFAULT, 'Pałac  zimowy "Ajsbierg"',1);
-INSERT INTO places VALUES (DEFAULT, 'Adler-Arena',1);
-INSERT INTO places VALUES (DEFAULT, 'Arena lodowa "Szajba"',1);
-INSERT INTO places VALUES (DEFAULT, 'Centrum "Ledianoj kub"',1);
-INSERT INTO places VALUES (DEFAULT, 'Plac "Miedał Płaza',1);
+INSERT INTO places VALUES (DEFAULT, 'Pałac lodowy "Bolszoj"',2);
+INSERT INTO places VALUES (DEFAULT, 'Pałac  zimowy "Ajsbierg"',3);
+INSERT INTO places VALUES (DEFAULT, 'Adler-Arena',4);
+INSERT INTO places VALUES (DEFAULT, 'Arena lodowa "Szajba"',5);
+INSERT INTO places VALUES (DEFAULT, 'Centrum "Ledianoj kub"',6);
+INSERT INTO places VALUES (DEFAULT, 'Plac "Miedał Płaza',7);
 
 
 

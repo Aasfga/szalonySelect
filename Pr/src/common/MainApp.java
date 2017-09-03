@@ -1,4 +1,5 @@
 package common;
+import java.sql.SQLException;
 
 import common.generators.Preparer;
 import common.generators.Randomise;
@@ -34,6 +35,18 @@ public class MainApp {
             schemaProvider.create();
             schemaProvider.addData();
             schemaProvider.views();
+
+            for (int i=0;i<1000;i++){
+                Player.generate();
+                Judge.generate();
+                Team.generate();
+            }
+            for (int i=0;i<200;i++){
+                Event.generate();
+            }
+            for (int i=0;i<1500;i++){
+                Results.generate();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +125,12 @@ public class MainApp {
                         displayFunction();
                         break;
                     case "2":
-                        addFunction();
+                        try
+                        {
+                            addFunction();
+                        }catch( SQLException e ) {
+                            System.out.println("Wrong Data");
+                        }
                         break;
                     default:
                         break;
@@ -171,11 +189,6 @@ public class MainApp {
                 return;
             }
 
-            if ( "6".equals(table)){
-                Category.manually();
-                return;
-            }
-
             System.out.println("Please, try again.");
             table = scanner.next();
         }
@@ -209,12 +222,10 @@ public class MainApp {
                     Team.generate();
                     break;
                 case "4":
-                    Event.builder(statement).add();
                     Event.generate();
                     break;
                 case "5":
-                    Event.generate();
-                    break;
+                    Results.generate();
             }
         } else {
             switch (table){

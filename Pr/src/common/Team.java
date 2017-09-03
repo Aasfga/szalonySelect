@@ -88,11 +88,10 @@ public class Team {
             System.out.println( "Success! New teams has been added!" );
         }
 
-        public void manually(){
+        public void manually() throws SQLException {
             Communication.hello( "team" );
             String sex=Communication.enter( "sex","1-male, 2-female" );
 
-            try {
                 Communication.hello( "Select discipline");
                 String sql = "SELECT d.id, c.name FROM disciplines as d left join categories as c on d.id_categories = c.id where id_sex = " + sex + ";";
                 ResultSet rs = statement.executeQuery(sql);
@@ -102,7 +101,7 @@ public class Team {
                 Communication.hello( "Select nationality");
                 sql = "SELECT * FROM nationalities;";
                 rs = statement.executeQuery(sql);
-//                displayResultSet(rs);
+                displayResultSet(rs);
                 String nationalities =Communication.enter("Select ID" );
 
                 sql = "INSERT INTO teams VALUES(DEFAULT ," + sex + "," + discipline + "," + nationalities+ ");";
@@ -135,11 +134,8 @@ public class Team {
                     sql = "INSERT INTO player_team VALUES("+ id_players + "," + teamID + ");";
                     statement.execute(sql);
                 }
+                System.out.println("Success!\n");
 
-            } catch (SQLException e) {
-                Communication.error( e );
-            }
-            System.out.println("Success!\n");
         }
 
     }
