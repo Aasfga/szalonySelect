@@ -23,11 +23,6 @@ CREATE VIEW results AS SELECT
  join events on id_event=events.id
  join finals on id_final=finals.id;
 
-CREATE VIEW players_all AS SELECT
-      players.*,weights.weight,weighst.date
-      from players
-            join weights on weights.id_player=players.id;
-
 CREATE VIEW lol AS
  select
  final,category, max(result) as scoremax from results where final=1 group by category,final;
