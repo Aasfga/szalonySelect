@@ -62,8 +62,7 @@ CREATE TABLE IF NOT EXISTS  events
 (
   id         SERIAL PRIMARY KEY,
   id_place   INTEGER REFERENCES places,
-  start_time TIMESTAMP NOT NULL ,
-  end_time   TIMESTAMP,
+  date TIMESTAMP NOT NULL ,
   id_disciplines INTEGER REFERENCES disciplines,
   id_final INTEGER REFERENCES finals,
   CHECK (start_time < events.end_time)

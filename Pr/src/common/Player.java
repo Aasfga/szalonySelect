@@ -66,9 +66,9 @@ public class Player {
             firstName = ( firstName == null ) ? ( (sexID.equals("1")) ? randomise.generateMaleName() : randomise.generateFemaleName() ) : firstName;
             lastName = ( lastName == null ) ? randomise.generateLastName() : lastName;
             nationalityID = ( nationalityID == null ) ? randomise.randomIdFromTable("nationalities") : nationalityID;
-            birthDate = ( birthDate == null ) ? randomise.generateBirthTime() : birthDate;
+            birthDate = ( birthDate == null ) ? Date.generateBirthDay() : birthDate;
 
-            weightDate = ( weightDate == null ) ?  randomise.generateOlympicTime() : weightDate;
+            weightDate = ( weightDate == null ) ?  Date.generateOlympic() : weightDate;
 
             String bodyMassKg = String.valueOf(randomise.randomFromBetween(50,80));
             String bodyMassAfterDot = String.valueOf(randomise.randomFromBetween(0,9));
@@ -102,8 +102,6 @@ public class Player {
         String weight = Communication.enter("weight");
         String weightDate = Date.manually();
 
-
-        //TODO check fields
 
         Builder builder = Player.builder();
 

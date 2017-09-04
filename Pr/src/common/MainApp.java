@@ -1,5 +1,6 @@
-
 package common;
+
+import java.sql.SQLException;
 
 import common.generators.Preparer;
 import common.generators.Randomise;
@@ -20,13 +21,13 @@ public class MainApp {
     public static Preparer preparer;
     public static Randomise randomise;
 
-    public static final Set <String> displaySet = getDisplayableTables();
-    public static final Set <String> addSet = getAddableTables();
+    public static final Set<String> displaySet = getDisplayableTables();
+    public static final Set<String> addSet = getAddableTables();
 
     public static void main(String args[]) {
 
         connectWithDataBase();
-
+        randomise = new Randomise(statement);
 
         try {
             SchemaProvider schemaProvider = new SchemaProvider(connection, statement);
@@ -124,10 +125,9 @@ public class MainApp {
                         displayFunction();
                         break;
                     case "2":
-                        try
-                        {
+                        try {
                             addFunction();
-                        }catch( SQLException e ) {
+                        } catch (SQLException e) {
                             System.out.println("Wrong Data");
                         }
                         break;
@@ -143,7 +143,7 @@ public class MainApp {
 
     private static void displayFunction() throws SQLException {
         String choice;
-        while( true ) {
+        while (true) {
             System.out.println("Choose table you want to display? ( or enter BACK for back to menu )");
             int counter = 1;
             for ( Object a : displaySet ) {
@@ -152,7 +152,6 @@ public class MainApp {
             }
 
             choice = scanner.next();
-
             switch (choice) {
                 case "1":
                     displayTable("nationalities");
@@ -189,11 +188,6 @@ public class MainApp {
                     break;
             }
 
-            if( displaySet.contains(choice) ){
-                displayTable(choice);
-                return;
-            }
-
             if ("BACK".equals(choice)) {
                 return;
             }
@@ -201,7 +195,6 @@ public class MainApp {
             failureCommunicate();
         }
     }
-
 
 
     private static void addFunction() throws SQLException {
@@ -224,7 +217,7 @@ public class MainApp {
             if ("1".equals(table) || "2".equals(table) || "3".equals(table) || "4".equals(table) || "5".equals(table)) {
                 break;
             }
-            if ("6".equals(table)){
+            if ("6".equals(table)) {
                 Category.manually();
                 return;
             }
@@ -237,7 +230,7 @@ public class MainApp {
         System.out.println("Choose 1 for generate automatically, or 2 for do it manually. (BACK for back)");
 
         String choice = scanner.next();
-        while( true ) {
+        while (true) {
 
             if ("BACK".equals(choice)) {
                 return;
@@ -250,8 +243,8 @@ public class MainApp {
             choice = scanner.next();
         }
 
-        if( "1".equals(choice)){
-            switch (table){
+        if ("1".equals(choice)) {
+            switch (table) {
                 case "1":
                     Player.generate();
                     break;
@@ -268,7 +261,7 @@ public class MainApp {
                     Results.generate();
             }
         } else {
-            switch (table){
+            switch (table) {
                 case "1":
                     Player.manually();
                     break;
@@ -289,7 +282,7 @@ public class MainApp {
     }
 
     private static Set<String> getDisplayableTables() {
-        LinkedHashSet <String> set = new LinkedHashSet<>();
+        LinkedHashSet<String> set = new LinkedHashSet<>();
         set.add("nationalities");
         set.add("disciplines");
         set.add("players");
@@ -305,7 +298,7 @@ public class MainApp {
     }
 
     private static Set<String> getAddableTables() {
-        LinkedHashSet <String> set = new LinkedHashSet<>();
+        LinkedHashSet<String> set = new LinkedHashSet<>();
         set.add("categories");
         set.add("players");
         set.add("teams");

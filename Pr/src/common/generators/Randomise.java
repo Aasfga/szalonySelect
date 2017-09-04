@@ -362,13 +362,4 @@ public class Randomise {
         return lastNames[rand];
     }
 
-    public String generateBirthTime(){
-        Timestamp timestamp = new Timestamp( randomFromBetween(400000000000L,1000000000000L) );
-        return timestamp.toString();
-    }
-
-    public String generateOlympicTime(){
-        Timestamp timestamp = new Timestamp( randomFromBetween(1498000000000L,1500000000000L));
-        return timestamp.toString();
-    }
 }
