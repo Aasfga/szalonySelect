@@ -186,6 +186,9 @@ public class MainApp {
                 case "11":
                     displayTable("bronze_medals");
                     break;
+                case "12":
+                    displayTable("ranking");
+                    break;
             }
 
             if ("BACK".equals(choice)) {

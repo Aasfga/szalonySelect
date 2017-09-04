@@ -11,7 +11,7 @@ DROP VIEW IF EXISTS lol2 cascade;
 DROP VIEW IF EXISTS lol cascade;
 DROP VIEW IF EXISTS teams_views CASCADE;
 DROP VIEW IF EXISTS events_views CASCADE;
-
+DROP VIEW IF EXISTS ranking CASCADE;
 
 CREATE VIEW team_category AS SELECT
       nationalities.name as country,categories.name as category,teams.id as team
@@ -19,6 +19,7 @@ CREATE VIEW team_category AS SELECT
             join nationalities on id_nationalities=nationalities.id
             join disciplines on id_discipline=disciplines.id
             join categories on id_categories=categories.id;
+
 
 CREATE VIEW results AS SELECT
  country, category,id_final as final, finals.name, event_team_result.result as result
@@ -68,3 +69,6 @@ CREATE VIEW events_views AS SELECT e.id, p.name as place_name, e.start_time, e.e
 	join places as p on e.id_place = p.id
 	join disciplines_views as d on d.id = e.id_disciplines
 	join finals as f on f.id = e.id_final;
+
+CREATE VIEW ranking as select
+      country,count(category) from gold_medals group by country group by 2,1;
