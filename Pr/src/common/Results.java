@@ -70,8 +70,8 @@ public class Results {
                 }
 
             }
-            String[] tab= {"1","2","3","0","4","5","6","7","8"};
-            int x=randomise.randomFromBetween(0,8);
+            String[] tab= {"1","0"};
+            int x=randomise.randomFromBetween(0,1);
             result = ( result == null ) ? tab[x] : result;
             String sql = "INSERT INTO event_team_result VALUES(" + id_event + "," + id_team + "," + result + ");";
 
