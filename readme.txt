@@ -25,35 +25,19 @@ Opis bazy:
 		rozgrywki
 	-judge_game
 		pomocnicza pomiędzy sędziami i rozgrykami
-	-event_team
+	-events
 		pomocnicza pomiędzy rozgrykami i druzynami
-	-scoreResults
-		wyniki danego meczu
-	-timeResults
-		czasy zawodników
-	-noteResults
-		noty przydzielone przez sędziów
+	-event_team_result
+		wynik rozgrywek
 	-finals
 		etapy rozgrywek
 
-		
+
 	Wyzwalacze:
-	-team_insert
+	-event_team_result_insert
 		sprawdza poprawność danych drużyny
-	-sex_change_team
-		sprawdza czy zawodnicy danej płci rywalizują w swojej kategorii
-	-result_after_finish
-		sprawdza czy czas rozgrywki jest poprawny
-	-number_of_teams
-		sprawdza czy odpowiednia ilość druzyn startuje w danej dyscyplinie
-	-one_nationality
-		sprawdza czy gracze reprezentują swój kraj
-	-one_judge_in_game
-		sprawdza czy sędzia sędziuje tylko jeden mecz
-	-insert_event
-		sprawdza kolejność rozgrywek
 	
-	
+
 	Perspektywy:
 	-team_category
 		zwraca informacje o reprezentacji każdej kategorii
