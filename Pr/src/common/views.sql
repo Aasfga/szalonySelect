@@ -71,4 +71,4 @@ CREATE VIEW events_views AS SELECT e.id, p.name as place_name, e.date, d.sex_nam
 	join finals as f on f.id = e.id_final;
 
 CREATE VIEW ranking as select
-      country,count(category) from gold_medals group by country group by 2,1;
+      country,count(category) from gold_medals group by country order by 2,1;

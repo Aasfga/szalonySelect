@@ -297,6 +297,7 @@ public class MainApp {
         set.add("gold_medals");
         set.add("silver_medals");
         set.add("bronze_medals");
+        set.add("ranking");
         return set;
     }
 
