@@ -74,7 +74,7 @@ public class MainApp {
                 connection = DriverManager
                         .getConnection("jdbc:postgresql://localhost:5432/" + databaseName, login, password);
 
-                connection.setAutoCommit(false); //TODO IS THIS IMPORTANT?
+                connection.setAutoCommit(false);
 
                 statement = connection.createStatement();
 
@@ -192,7 +192,6 @@ public class MainApp {
                 return;
             }
 
-            failureCommunicate();
         }
     }
 

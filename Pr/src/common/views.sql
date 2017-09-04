@@ -64,7 +64,7 @@ CREATE VIEW players_views AS SELECT p.id, p.first_name, p.last_name, n.name, p.b
 	join nationalities as n on p.id_nationality = n.id
 	join sexes as s on s.id = p.id_sex;
 
-CREATE VIEW events_views AS SELECT e.id, p.name as place_name, e.start_time, e.end_time, d.sex_name, d.name_category, f.name as name_finals from events as e 
+CREATE VIEW events_views AS SELECT e.id, p.name as place_name, e.date, d.sex_name, d.name_category, f.name as name_finals from events as e
 	join places as p on e.id_place = p.id
 	join disciplines_views as d on d.id = e.id_disciplines
 	join finals as f on f.id = e.id_final;
