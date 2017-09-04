@@ -7,6 +7,7 @@ DROP VIEW IF EXISTS players_all cascade;
 DROP VIEW IF EXISTS lol3 cascade;
 DROP VIEW IF EXISTS lol2 cascade;
 DROP VIEW IF EXISTS lol cascade;
+DROP VIEW IF EXISTS team CASCADE;
 
 
 CREATE VIEW team_category AS SELECT
@@ -17,11 +18,18 @@ CREATE VIEW team_category AS SELECT
             join categories on id_categories=categories.id;
 
 CREATE VIEW results AS SELECT
- country, category,id_final as final, finals.name, event_team_result.result as points
+ country, category,id_final as final, finals.name, event_team_result.result as result
  from team_category
  join event_team_result on id_team=team
  join events on id_event=events.id
  join finals on id_final=finals.id;
+
+CREATE VIEW team as
+ select teams.id ,sexes.name as sex,categories.name as category,nationalities.name as nationality
+ from teams join sexes on teams.id_sex=sexes.id
+ join disciplines on id_discipline=disciplines.id
+ join categories on id_categories=categories.id
+ join nationalities on nationalities.id=id_nationalities;
 
 CREATE VIEW lol AS
  select
