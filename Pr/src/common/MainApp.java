@@ -1,5 +1,5 @@
+
 package common;
-import java.sql.SQLException;
 
 import common.generators.Preparer;
 import common.generators.Randomise;
@@ -35,7 +35,6 @@ public class MainApp {
             schemaProvider.create();
             schemaProvider.addData();
             schemaProvider.views();
-
             for (int i=0;i<1000;i++){
                 Player.generate();
                 Judge.generate();
@@ -146,8 +145,49 @@ public class MainApp {
         String choice;
         while( true ) {
             System.out.println("Choose table you want to display? ( or enter BACK for back to menu )");
-            System.out.println(displaySet);
+            int counter = 1;
+            for ( Object a : displaySet ) {
+                System.out.println(counter + " - " + a);
+                counter++;
+            }
+
             choice = scanner.next();
+
+            switch (choice) {
+                case "1":
+                    displayTable("nationalities");
+                    break;
+                case "2":
+                    displayTable("disciplines_views");
+                    break;
+                case "3":
+                    displayTable("players_views");
+                    break;
+                case "4":
+                    displayTable("teams_views");
+                    break;
+                case "5":
+                    displayTable("judges");
+                    break;
+                case "6":
+                    displayTable("events_views");
+                    break;
+                case "7":
+                    displayTable("places");
+                    break;
+                case "8":
+                    displayTable("results");
+                    break;
+                case "9":
+                    displayTable("gold_medals");
+                    break;
+                case "10":
+                    displayTable("silver_medals");
+                    break;
+                case "11":
+                    displayTable("bronze_medals");
+                    break;
+            }
 
             if( displaySet.contains(choice) ){
                 displayTable(choice);
@@ -272,23 +312,6 @@ public class MainApp {
         set.add("judges");
         set.add("events");
         return set;
-    }
-
-
-    @Deprecated
-    private static void addNationality() {
-        System.out.printf("Enter nationality name:");
-        String name = scanner.next();
-
-        try {
-            String sql = "INSERT INTO nationalities VALUES( DEFAULT, '" + name + "');";
-            statement.execute(sql);
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...Sorry. Try different name.");
-            e.printStackTrace();
-            return;
-        }
-        System.out.println("Success! " + name + " added.\n");
     }
 
     private static void failureCommunicate() {
