@@ -20,7 +20,7 @@ public class Date {
     }
 
     public static String generateOlympic(){
-        int day =  MainApp.randomise.randomFromBetween(10,31);
+        int day =  MainApp.randomise.randomFromBetween(10,30);
 
         if( day > 20) {
             return "2017-06" + "-" + day;
@@ -45,7 +45,7 @@ public class Date {
             month = "0" + month;
         }
 
-        String day = String.valueOf((gc.get(gc.DAY_OF_MONTH) + 1));
+        String day = String.valueOf((gc.get(gc.DAY_OF_MONTH)));
         if( day.length() < 2){
             day = "0" + day;
         }

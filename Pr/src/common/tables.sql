@@ -62,10 +62,9 @@ CREATE TABLE IF NOT EXISTS  events
 (
   id         SERIAL PRIMARY KEY,
   id_place   INTEGER REFERENCES places,
-  date TIMESTAMP NOT NULL ,
+  date DATE NOT NULL ,
   id_disciplines INTEGER REFERENCES disciplines,
-  id_final INTEGER REFERENCES finals,
-  CHECK (start_time < events.end_time)
+  id_final INTEGER REFERENCES finals
 );
 
 CREATE TABLE IF NOT EXISTS  teams
@@ -82,7 +81,7 @@ CREATE TABLE IF NOT EXISTS  players
   first_name     VARCHAR(30)                          NOT NULL,
   last_name      VARCHAR(30)                          NOT NULL,
   id_nationality INTEGER REFERENCES nationalities NOT NULL,
-  birth_date     TIMESTAMP                        NOT NULL,
+  birth_date     DATE                        NOT NULL,
   id_sex         INTEGER REFERENCES sexes         NOT NULL
 );
 
@@ -90,7 +89,7 @@ CREATE TABLE IF NOT EXISTS  weights
 (
   id_player INTEGER REFERENCES players,
   weight    NUMERIC(10, 2) NOT NULL,
-  date      TIMESTAMP      NOT NULL
+  date      DATE      NOT NULL
 );
 
 
