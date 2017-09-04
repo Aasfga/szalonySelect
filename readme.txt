@@ -50,3 +50,16 @@ Opis bazy:
 	-bronze_medal
 		brązowe medale każdej kategorii
 	
+
+UWAGA!!!
+
+W celu poprawnego uruchomienia aplikacji należy:
+1. Wejść na stronę:
+
+https://jdbc.postgresql.org/download.html
+
+2. Pobrać najnowszy sterownik.
+
+3. Umieścić pobrany sterownik do biblioteki projektu.
+
+IntelliJ -> Ctrl+Alt+Shift+S -> libraries -> "+"

@@ -283,6 +283,7 @@ public class MainApp {
 
     }
 
+    @Deprecated
     private static Set<String> getDisplayableTables() {
         LinkedHashSet<String> set = new LinkedHashSet<>();
         set.add("nationalities");
@@ -299,6 +300,7 @@ public class MainApp {
         return set;
     }
 
+    @Deprecated
     private static Set<String> getAddableTables() {
         LinkedHashSet<String> set = new LinkedHashSet<>();
         set.add("categories");
